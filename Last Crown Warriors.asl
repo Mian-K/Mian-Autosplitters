@@ -3,7 +3,7 @@ state("gambatte") {}
 state("gambatte_speedrun") {}
 
 init { 
-    version = "must be 0.7a, rework ASL after updates are released";
+    version = "Made for 0.7a Update 2";
 }
 
 startup {
@@ -20,7 +20,7 @@ startup {
     vars.Helper.Load = (Func<dynamic, bool>)(emu =>
     {
         emu.Make<byte>("level", 0x132D);
-        emu.Make<byte>("game_State", 0x0315); 
+        emu.Make<byte>("game_State", 0x0318); 
         /* 
             0x01 = Title Screen,
             0x05 = Game Over,
