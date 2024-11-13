@@ -57,5 +57,5 @@ split {
     }
 }
 reset {
-    return current.game_State == 0x7f;
+    return current.game_State == 0x14;
 }
