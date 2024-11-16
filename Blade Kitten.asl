@@ -1,7 +1,8 @@
 ﻿state ("BladeKitten")
 {
-    int levelID : "bladekitten.exe", 0x00729C18, 0x18;      // Start at 0 in order
-    int gameState : "bladekitten.exe", 0x6BEFD4;            // 0 = Load, 1 = Title Screen, 2 = Level, 3 = Pause
+    int levelID   : "bladekitten.exe", 0x00729C18, 0x18;      // Start at 0 in order
+    int gameState : "bladekitten.exe", 0x006BEFD4;            // 0 = Load, 1 = Title Screen, 2 = Level, 3 = Pause
+    float healthDreadnaught : "bladekitten.exe", 0x00729C18, 0x48, 0x68, 0x1A0, 0x190, 0x6C0; 
 }
 
 startup
@@ -31,7 +32,13 @@ startup
 }
 split
 {
-    return current.levelID != old.levelID && settings["level_" + old.levelID];    
+    if (gameTime <= new TimeSpan(0,0,1) return false;
+    
+    if (old.levelID == 12)
+        return current.healthDreadnaught == 0 && old.healthDreadnaught > 0 && settings["level_12"];
+    else if (old.levelID == 18)
+        return false;
+    else return current.levelID != old.levelID && settings["level_" + old.levelID];    
 }
 isLoading
 {
