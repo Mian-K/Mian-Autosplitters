@@ -3,7 +3,6 @@
     int levelID             : "bladekitten.exe", 0x00729C18, 0x18;      // Start at 0 in order
     int gameState           : "bladekitten.exe", 0x006BEFD4;            // 0 = Load, 1 = Title Screen, 2 = Level, 3 = Pause, 4 Special Cutscene
     float healthDreadnaught : "bladekitten.exe", 0x00729C18, 0x48, 0x68, 0x1A0, 0x190, 0x6C0;
-    int gameMenu            : "bladekitten.exe", 0x006AEB48;            // 0 = Ingame, 2 = MainMenu
 }
 
 startup
@@ -58,8 +57,4 @@ onStart
 {
     timer.IsGameTimePaused = true;
     timer.SetGameTime(TimeSpan.FromSeconds(0));
-}
-reset
-{
-    return current.gameMenu == 2;
 }
