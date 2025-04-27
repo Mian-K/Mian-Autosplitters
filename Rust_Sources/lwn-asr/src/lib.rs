@@ -1194,22 +1194,22 @@ async fn main() {
                       timer::split()
                     }
                   }
-                  if settings.vanessa_1_start && boss_dialogue.pair.unwrap().changed_to(&2) && !vanessa_1_start {
+                  if settings.vanessa_1_start && boss_dialogue.pair.unwrap().changed_to(&4) && !vanessa_1_start {
                     vanessa_1_start = true;
                     print_message("Split Vanessa 1 Start");
                     timer::split()
                   }
-                  if settings.vanessa_2_start && boss_dialogue.pair.unwrap().changed_to(&2) && !vanessa_2_start {
+                  if settings.vanessa_2_start && boss_dialogue.pair.unwrap().changed_to(&5) && !vanessa_2_start {
                     vanessa_2_start = true;
                     print_message("Split Vanessa 2 Start");
                     timer::split()
                   }
-                  if settings.nonota_start && boss_dialogue.pair.unwrap().changed_to(&2) && !nonota_start {
+                  if settings.nonota_start && boss_dialogue.pair.unwrap().changed_to(&6) && !nonota_start {
                     nonota_start = true;
                     print_message("Split Nonota Start");
                     timer::split()
                   }
-                  if settings.secret_armor_start && boss_dialogue.pair.unwrap().changed_to(&2) && !secret_start {
+                  if settings.secret_armor_start && boss_dialogue.pair.unwrap().changed_to(&7) && !secret_start {
                     secret_start = true;
                     print_message("Split Secret Armor Start");
                     timer::split()
