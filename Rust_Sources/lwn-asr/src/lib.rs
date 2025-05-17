@@ -1216,12 +1216,12 @@ async fn main() {
                   }
                   let seal_1: ArrayString<128> = ArrayString::<128>::from("Act06_Room05").unwrap();
                   let seal_2: ArrayString<128> = ArrayString::<128>::from("Act06_Room06").unwrap();
-                  if settings.seal_1_start && script_name.pair.unwrap().changed_to(&seal_1) && seal_1_start {
+                  if settings.seal_1_start && script_name.pair.unwrap().changed_to(&seal_1) && !seal_1_start {
                     seal_1_start = true;
                     print_message("Split Seal 1 Start");
                     timer::split()
                   }
-                  if settings.seal_2_start && script_name.pair.unwrap().changed_to(&seal_2) && seal_2_start {
+                  if settings.seal_2_start && script_name.pair.unwrap().changed_to(&seal_2) && !seal_2_start {
                     seal_2_start = true;
                     print_message("Split Seal 2 Start");
                     timer::split()
@@ -1275,12 +1275,12 @@ async fn main() {
                     print_message("Split Knight Dead");
                     timer::split()
                   }
-                  if settings.seal_1_dead && stage_id == 5 && boss_seal_1.pair.unwrap().old +1 == boss_seal_1.pair.unwrap().current && !seal_1_dead {
+                  if settings.seal_1_dead && stage_id == 6 && boss_seal_1.pair.unwrap().old +1 == boss_seal_1.pair.unwrap().current && !seal_1_dead {
                     seal_1_dead = !settings.split_every_boss_kill;
                     print_message("Split Seal 1 Dead");
                     timer::split()
                   }
-                  if settings.seal_2_dead && stage_id == 5 && boss_seal_2.pair.unwrap().old +1 == boss_seal_2.pair.unwrap().current && !seal_2_dead {
+                  if settings.seal_2_dead && stage_id == 6 && boss_seal_2.pair.unwrap().old +1 == boss_seal_2.pair.unwrap().current && !seal_2_dead {
                     seal_2_dead = !settings.split_every_boss_kill;
                     print_message("Split Seal 2 Dead");
                     timer::split()
