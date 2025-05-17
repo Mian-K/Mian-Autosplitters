@@ -1230,57 +1230,57 @@ async fn main() {
 
                 // Main Game Boss Dead Splits
                 {
-                  if settings.armor_dead && stage_id == 2 && boss_armor.pair.unwrap().increased() && !armor_dead {
+                  if settings.armor_dead && stage_id == 2 && boss_armor.pair.unwrap().old +1 == boss_armor.pair.unwrap().current && !armor_dead {
                     armor_dead = !settings.split_every_boss_kill;
                     print_message("Split Armor Dead");
                     timer::split()
                   }
-                  if settings.secret_armor_dead && stage_id == 2 && boss_secret.pair.unwrap().increased() && !secret_dead {
+                  if settings.secret_armor_dead && stage_id == 2 && boss_secret.pair.unwrap().old +1 == boss_secret.pair.unwrap().current && !secret_dead {
                     secret_dead = !settings.split_every_boss_kill;
                     print_message("Split Secret Armor Dead");
                     timer::split()
                   }
-                  if settings.tania_dead && stage_id == 3 && boss_tania.pair.unwrap().increased() && !tania_dead {
+                  if settings.tania_dead && stage_id == 3 && boss_tania.pair.unwrap().old +1 == boss_tania.pair.unwrap().current && !tania_dead {
                     tania_dead = !settings.split_every_boss_kill;
                     print_message("Split Tania Dead");
                     timer::split()
                   }
-                  if settings.monica_1_dead && stage_id == 4 && boss_monica_1.pair.unwrap().increased() && !monica_1_dead {
+                  if settings.monica_1_dead && stage_id == 4 && boss_monica_1.pair.unwrap().old +1 == boss_monica_1.pair.unwrap().current && !monica_1_dead {
                     monica_1_dead = !settings.split_every_boss_kill;
                     print_message("Split Monica 1 Dead");
                     timer::split()
                   }
-                  if settings.monica_2_dead && stage_id == 4 && boss_monica_2.pair.unwrap().increased() && !monica_2_dead {
+                  if settings.monica_2_dead && stage_id == 4 && boss_monica_2.pair.unwrap().old +1 == boss_monica_2.pair.unwrap().current && !monica_2_dead {
                     monica_2_dead = !settings.split_every_boss_kill;
                     print_message("Split Monica 2 Dead");
                     timer::split()
                   }
-                  if settings.vanessa_1_dead && stage_id == 5 && boss_vanessa_1.pair.unwrap().increased() && !vanessa_1_dead {
+                  if settings.vanessa_1_dead && stage_id == 5 && boss_vanessa_1.pair.unwrap().old +1 == boss_vanessa_1.pair.unwrap().current && !vanessa_1_dead {
                     vanessa_1_dead = !settings.split_every_boss_kill;
                     print_message("Split Vanessa 1 Dead");
                     timer::split()
                   }
-                  if settings.vanessa_2_dead && stage_id == 6 && boss_vanessa_2.pair.unwrap().increased() && !vanessa_2_dead {
+                  if settings.vanessa_2_dead && stage_id == 6 && boss_vanessa_2.pair.unwrap().old +1 == boss_vanessa_2.pair.unwrap().current && !vanessa_2_dead {
                     vanessa_2_dead = !settings.split_every_boss_kill;
                     print_message("Split Vanessa 2 Dead");
                     timer::split()
                   }
-                  if settings.nonota_dead && stage_id == 7 && boss_nonota.pair.unwrap().increased() && !nonota_dead {
+                  if settings.nonota_dead && stage_id == 7 && boss_nonota.pair.unwrap().old +1 == boss_nonota.pair.unwrap().current && !nonota_dead {
                     nonota_dead = !settings.split_every_boss_kill;
                     print_message("Split Nonota Dead");
                     timer::split()
                   }
-                  if settings.knight_dead && stage_id == 5 && boss_knight.pair.unwrap().increased() && !knight_dead {
+                  if settings.knight_dead && stage_id == 5 && boss_knight.pair.unwrap().old +1 == boss_knight.pair.unwrap().current && !knight_dead {
                     knight_dead = !settings.split_every_boss_kill;
                     print_message("Split Knight Dead");
                     timer::split()
                   }
-                  if settings.seal_1_dead && stage_id == 5 && boss_seal_1.pair.unwrap().increased() && !seal_1_dead {
+                  if settings.seal_1_dead && stage_id == 5 && boss_seal_1.pair.unwrap().old +1 == boss_seal_1.pair.unwrap().current && !seal_1_dead {
                     seal_1_dead = !settings.split_every_boss_kill;
                     print_message("Split Seal 1 Dead");
                     timer::split()
                   }
-                  if settings.seal_2_dead && stage_id == 5 && boss_seal_2.pair.unwrap().increased() && !seal_2_dead {
+                  if settings.seal_2_dead && stage_id == 5 && boss_seal_2.pair.unwrap().old +1 == boss_seal_2.pair.unwrap().current && !seal_2_dead {
                     seal_2_dead = !settings.split_every_boss_kill;
                     print_message("Split Seal 2 Dead");
                     timer::split()
@@ -1289,64 +1289,64 @@ async fn main() {
 
                 // Cutscenes
                 {
-                  if settings.first_barrier_stone && flag_crystal1.pair.unwrap().increased() {
+                  if settings.first_barrier_stone && flag_crystal1.pair.unwrap().old +1 == flag_crystal1.pair.unwrap().current {
                     print_message("Split First Barrier Stone");
                     timer::split()
                   }
-                  if settings.rescue_cat && flag_save_cat.pair.unwrap().increased() {
+                  if settings.rescue_cat && flag_save_cat.pair.unwrap().old +1 == flag_save_cat.pair.unwrap().current {
                     print_message("Split Cat Rescue");
                     timer::split()
                   }
-                  if settings.ice_trial && flag_tutorial_ice.pair.unwrap().increased() {
+                  if settings.ice_trial && flag_tutorial_ice.pair.unwrap().old +1 == flag_tutorial_ice.pair.unwrap().current {
                     print_message("Split Ice Trial");
                     timer::split()
                   }
-                  if settings.destroy_wood_planks && flag_destroy_wood.pair.unwrap().increased() {
+                  if settings.destroy_wood_planks && flag_destroy_wood.pair.unwrap().old +1 == flag_destroy_wood.pair.unwrap().current {
                     print_message("Split Destroy Wood");
                     timer::split()
                   }
-                  if settings.fire_trial && flag_tutorial_fire.pair.unwrap().increased() {
+                  if settings.fire_trial && flag_tutorial_fire.pair.unwrap().old +1 == flag_tutorial_fire.pair.unwrap().current {
                     print_message("Split Fire Trial");
                     timer::split()
                   }
-                  if settings.hat_lost && flag_hat_lost.pair.unwrap().increased() {
+                  if settings.hat_lost && flag_hat_lost.pair.unwrap().old +1 == flag_hat_lost.pair.unwrap().current {
                     print_message("Split Hat Lost");
                     timer::split()
                   }
-                  if settings.hat_get && flag_hat_get.pair.unwrap().increased() {
+                  if settings.hat_get && flag_hat_get.pair.unwrap().old +1 == flag_hat_get.pair.unwrap().current {
                     print_message("Split Hat Get");
                     timer::split()
                   }
-                  if settings.orb_after_get_hat && flag_post_hat_orb.pair.unwrap().increased() {
+                  if settings.orb_after_get_hat && flag_post_hat_orb.pair.unwrap().old +1 == flag_post_hat_orb.pair.unwrap().current {
                     print_message("Split Post Hat Get Orb");
                     timer::split()
                   }
-                  if settings.thunder_trial && flag_tutorial_thunder.pair.unwrap().increased() {
+                  if settings.thunder_trial && flag_tutorial_thunder.pair.unwrap().old +1 == flag_tutorial_thunder.pair.unwrap().current {
                     print_message("Split Thunder Trial");
                     timer::split()
                   }
-                  if settings.end_of_dark_tunnel && flag_dark_tunnel_done.pair.unwrap().increased() {
+                  if settings.end_of_dark_tunnel && flag_dark_tunnel_done.pair.unwrap().old +1 == flag_dark_tunnel_done.pair.unwrap().current {
                     print_message("Split Dark Tunnel End Cutscene");
                     timer::split()
                   }
-                  if settings.castle_4_barrier_stone && flag_crystal_for_teleport.pair.unwrap().increased() {
+                  if settings.castle_4_barrier_stone && flag_crystal_for_teleport.pair.unwrap().old +1 == flag_crystal_for_teleport.pair.unwrap().current {
                     print_message("Split Crystal for teleporter");
                     timer::split()
                   }
-                  if settings.open_abyss_door && flag_abyss_door.pair.unwrap().increased() {
+                  if settings.open_abyss_door && flag_abyss_door.pair.unwrap().old +1 == flag_abyss_door.pair.unwrap().current {
                     print_message("Split Abyss Door");
                     timer::split()
                   }
                   if stage_id == 7 {
-                    if settings.left_challenge && flag_abyss_challenge_left.pair.unwrap().increased() {
+                    if settings.left_challenge && flag_abyss_challenge_left.pair.unwrap().old +1 == flag_abyss_challenge_left.pair.unwrap().current {
                       print_message("Split Abyss Challenge Left");
                       timer::split()
                     }
-                    if settings.right_challenge && flag_abyss_challenge_right.pair.unwrap().increased() {
+                    if settings.right_challenge && flag_abyss_challenge_right.pair.unwrap().old +1 == flag_abyss_challenge_right.pair.unwrap().current {
                       print_message("Split Abyss Challenge Right");
                       timer::split()
                     }
-                    if settings.center_challenge && flag_abyss_challenge_center.pair.unwrap().increased() {
+                    if settings.center_challenge && flag_abyss_challenge_center.pair.unwrap().old +1 == flag_abyss_challenge_center.pair.unwrap().current {
                       print_message("Split Abyss Challenge Center");
                       timer::split()
                     }
@@ -1394,7 +1394,7 @@ async fn main() {
                   }
                   if item_count > max_items { max_items = item_count }
 
-                  if settings.treasure_chest && chest_count.pair.unwrap().increased() {
+                  if settings.treasure_chest && chest_count.pair.unwrap().old +1 == chest_count.pair.unwrap().current {
                     print_message("Split Chest");
                     timer::split()
                   }
@@ -1438,52 +1438,52 @@ async fn main() {
                         timer::split()
                       }
                     }
-                    if settings.armor && tt_armor.pair.unwrap().increased() {
+                    if settings.armor && tt_armor.pair.unwrap().old +1 == tt_armor.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Armor Dead");
                       timer::split()
                     }
-                    if settings.tania && tt_tania.pair.unwrap().increased() {
+                    if settings.tania && tt_tania.pair.unwrap().old +1 == tt_tania.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Tania Dead");
                       timer::split()
                     }
-                    if settings.monica_1 && tt_monica_1.pair.unwrap().increased() {
+                    if settings.monica_1 && tt_monica_1.pair.unwrap().old +1 == tt_monica_1.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Monica 1 Dead");
                       timer::split()
                     }
-                    if settings.monica_2 && tt_monica_2.pair.unwrap().increased() {
+                    if settings.monica_2 && tt_monica_2.pair.unwrap().old +1 == tt_monica_2.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Monica 2 Dead");
                       timer::split()
                     }
-                    if settings.knight && tt_knight.pair.unwrap().increased() {
+                    if settings.knight && tt_knight.pair.unwrap().old +1 == tt_knight.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Knight Dead");
                       timer::split()
                     }
-                    if settings.vanessa_1 && tt_vanessa_1.pair.unwrap().increased() {
+                    if settings.vanessa_1 && tt_vanessa_1.pair.unwrap().old +1 == tt_vanessa_1.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Vanessa 1 Dead");
                       timer::split()
                     }
-                    if settings.vanessa_2 && tt_vanessa_2.pair.unwrap().increased() {
+                    if settings.vanessa_2 && tt_vanessa_2.pair.unwrap().old +1 == tt_vanessa_2.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Vanessa 2 Dead");
                       timer::split()
                     }
-                    if settings.seal_1 && tt_seal_1.pair.unwrap().increased() {
+                    if settings.seal_1 && tt_seal_1.pair.unwrap().old +1 == tt_seal_1.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Seal 1 Dead");
                       timer::split()
                     }
-                    if settings.seal_2 && tt_seal_2.pair.unwrap().increased() {
+                    if settings.seal_2 && tt_seal_2.pair.unwrap().old +1 == tt_seal_2.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Seal 2 Dead");
                       timer::split()
                     }
-                    if settings.nonota && tt_nonota.pair.unwrap().increased() {
+                    if settings.nonota && tt_nonota.pair.unwrap().old +1 == tt_nonota.pair.unwrap().current {
                       tt_dead = false;
                       print_message("Split TT Nonota Dead");
                       timer::split()
