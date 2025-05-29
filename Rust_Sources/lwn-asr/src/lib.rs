@@ -56,6 +56,7 @@ struct Settings {
   #[default = false] rescue_cat: bool,
   #[default = false] ice_trial: bool,
   #[default = false] destroy_wood_planks: bool,
+  #[default = false] mid_lava_cutscene: bool,
   #[default = false] fire_trial: bool,
   #[default = false] hat_lost: bool,
   #[default = false] hat_get: bool,
@@ -105,9 +106,6 @@ struct Settings {
   #[default = true] knight: bool,
   #[default = false] seal_1: bool,
   #[default = true] seal_2: bool,
-  
-
-
 }
 
 async fn main() {
@@ -701,6 +699,7 @@ async fn main() {
 
         timer::set_variable("isLoading", "True");
         timer::set_variable("sceneName", "Uninitialized");
+        timer::set_variable("scriptName", "None");
         let mut is_loading;
         let mut scene_name:Watcher<ArrayString<128>> = Watcher::new();
         let mut magic_arcane:Watcher<u8> = Watcher::new();
@@ -827,6 +826,7 @@ async fn main() {
         tt_seal_2.update_infallible(0);
         tt_nonota.update_infallible(0);
 
+        let mut lava_middle_cutscene_seen:bool = false;
         let mut armor_start:bool = false;
         let mut armor_dead:bool = false;
         let mut tania_start:bool = false;
@@ -1072,6 +1072,7 @@ async fn main() {
 
           timer::set_variable("isLoading", if is_loading { "True" } else { "False" });
           timer::set_variable("sceneName", scene_name.clone().pair.unwrap().current.as_str());
+          timer::set_variable("scriptName", script_name.clone().pair.unwrap().current.as_str());
 
           // Reset
           {
@@ -1096,6 +1097,7 @@ async fn main() {
           // Reset variables if timer is not running
           if timer::state() == TimerState::NotRunning {
             timer::set_game_time(time::Duration::new(0,0));
+            lava_middle_cutscene_seen = false;
             armor_start = false;
             armor_dead = false;
             tania_start = false;
@@ -1303,6 +1305,13 @@ async fn main() {
                   }
                   if settings.destroy_wood_planks && flag_destroy_wood.pair.unwrap().old +1 == flag_destroy_wood.pair.unwrap().current {
                     print_message("Split Destroy Wood");
+                    timer::split()
+                  }
+                  let lava_ruins_cutscene: ArrayString<128> = ArrayString::<128>::from("Act04_Room05").unwrap();
+                  if settings.mid_lava_cutscene && script_name.pair.unwrap().changed_to(&lava_ruins_cutscene) && !lava_middle_cutscene_seen {
+                    // The flag for this cutscene is delayed by 8 seconds, implementing it this way for more consistent splitting.
+                    lava_middle_cutscene_seen = true;
+                    print_message("Split Lava Ruins Middle Cutscene");
                     timer::split()
                   }
                   if settings.fire_trial && flag_tutorial_fire.pair.unwrap().old +1 == flag_tutorial_fire.pair.unwrap().current {
