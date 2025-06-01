@@ -1,16 +1,18 @@
 #![no_std]
 
-use asr::{game_engine::unity::il2cpp::{
-  Module,
-  Image,
-  Class
-}, string::{
-  ArrayWString,
-  ArrayString
-}, settings::gui::{
-  set_tooltip,
-  Title
-}, settings::Gui, watcher::Watcher, timer, timer::TimerState, future::next_tick, Process, print_message, PointerSize::Bit64, time};
+use asr::{
+    future::next_tick,
+    game_engine::unity::il2cpp::{Class, Image, Module},
+    print_message,
+    settings::gui::{set_tooltip, Title},
+    settings::Gui,
+    string::{ArrayString, ArrayWString},
+    time, timer,
+    timer::TimerState,
+    watcher::Watcher,
+    PointerSize::Bit64,
+    Process,
+};
 
 asr::async_main!(stable);
 asr::panic_handler!();
