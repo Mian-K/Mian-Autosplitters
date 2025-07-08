@@ -135,6 +135,7 @@ async fn main() {
       .until_closes(async {
         
         timer::set_variable("Version", "1.0.*");
+        timer::set_variable("Souls Acquired", "Not Running");
         let module: Module = Module::wait_attach_auto_detect(&process).await;
         let image: Image = module.wait_get_default_image(&process).await;
 
@@ -146,6 +147,7 @@ async fn main() {
         let c_asset_manager: Class = image.wait_get_class(&process, &module, "GameAssetManager").await;
         let c_scene_switch_data: Class = image.wait_get_class(&process, &module, "SceneSwitchData").await;
         let c_game_save: Class = image.wait_get_class(&process, &module, "GameSave").await;
+        let c_game_collection: Class = image.wait_get_class(&process,&module, "GameCollection").await;
         let c_player_stats_data: Class = image.wait_get_class(&process, &module, "PlayerStatsData").await;
         let c_stage_flag_data: Class = image.wait_get_class(&process, &module, "StageFlagData").await;
         let c_game_property_data: Class = image.wait_get_class(&process, &module, "GamePropertyData").await;
@@ -324,6 +326,11 @@ async fn main() {
           o_game_save,
           o_game_save_to_props,
           c_game_property_data.wait_get_field_offset(&process, &module, "treasureChestCollection").await as u64
+        ];
+        let p_soul_acquired: [u64;3] = [
+          s_game,
+          c_game.wait_get_field_offset(&process,&module,"collection").await as u64,
+          c_game_collection.wait_get_field_offset(&process,&module,"soulAcquired").await as u64
         ];
         let p_progress_label: [u64; 5] = [ //<bool>((ptr, 0x0, 0x40, 0x30, 0x28, 0xA0)) { Name = "progressLabel" },
           s_game,
@@ -727,6 +734,7 @@ async fn main() {
         let mut flag_abyss_challenge_right:Watcher<u8> = Watcher::new();
         let mut flag_abyss_challenge_center:Watcher<u8> = Watcher::new();
         let mut chest_count:Watcher<u8> = Watcher::new();
+        let mut souls_acquired:[i32;2] = [-1,-1];
         let mut progress_label:Watcher<bool> = Watcher::new();
         let mut stage_id:u8 = 255;
         let mut on_system_menu:Watcher<bool> = Watcher::new();
@@ -938,6 +946,9 @@ async fn main() {
             if let Ok(chests) = process.read_pointer_path::<u8>(static_table, Bit64, &p_chest_count) {
               chest_count.update_infallible(chests);
             }
+            if let Ok(souls) = process.read_pointer_path::<i32>(static_table, Bit64, &p_soul_acquired) {
+              souls_acquired[1] = souls;
+            }
             if let Ok(label) = process.read_pointer_path::<bool>(static_table, Bit64, &p_progress_label) {
               progress_label.update_infallible(label);
             }
@@ -1075,6 +1086,8 @@ async fn main() {
           timer::set_variable("isLoading", if is_loading { "True" } else { "False" });
           timer::set_variable("sceneName", scene_name.clone().pair.unwrap().current.as_str());
           timer::set_variable("scriptName", script_name.clone().pair.unwrap().current.as_str());
+          if timer::state() == TimerState::NotRunning {timer::set_variable("Souls Acquired", "Not Running")}
+          else {timer::set_variable_int("Souls Acquired", souls_acquired[1] - souls_acquired[0])};
 
           // Reset
           {
@@ -1141,12 +1154,14 @@ async fn main() {
               if scene_name.pair.unwrap().changed_to(&act1) {
                 print_message("Start Main Game");
                 trial_tower = false;
+                souls_acquired[0] = souls_acquired[1];
                 timer::start()
               }
               if version {
                 if settings.start_on_new_game_trial_tower && scene_name.pair.unwrap().changed_to(&boss_rush) {
                   print_message("Trial Tower start.");
                   trial_tower = true;
+                  souls_acquired[0] = souls_acquired[1];
                   timer::start()
                 }
                 if settings.start_on_practice_mode_exit && stage_state.pair.unwrap().changed()
@@ -1154,19 +1169,29 @@ async fn main() {
                   || script_name.pair.unwrap().current == exit_test_mode) {
                   print_message("Practice Mode Exit Start");
                   trial_tower = true;
+                  souls_acquired[0] = souls_acquired[1];
                   timer::start()
                 }
               }
               if settings.start_with_timer {
-                if tt_test_time.pair.unwrap().old == 0f32 && tt_test_time.pair.unwrap().current > 0f32 { print_message("Start TT Test Time"); trial_tower = true; timer::start()}
-                if tt_armor_time.pair.unwrap().old == 0f32 && tt_armor_time.pair.unwrap().current > 0f32 { print_message("Start TT Armor Time"); trial_tower = true; timer::start() }
-                if tt_tania_time.pair.unwrap().old == 0f32 && tt_tania_time.pair.unwrap().current > 0f32 { print_message("Start TT Tania Time"); trial_tower = true; timer::start() }
-                if tt_monica_time.pair.unwrap().old == 0f32 && tt_monica_time.pair.unwrap().current > 0f32 { print_message("Start TT Monica Time"); trial_tower = true; timer::start() }
-                if tt_vanessa_1_time.pair.unwrap().old == 0f32 && tt_vanessa_1_time.pair.unwrap().current > 0f32 { print_message("Start TT Vanessa 1 Time"); trial_tower = true; timer::start() }
-                if tt_vanessa_2_time.pair.unwrap().old == 0f32 && tt_vanessa_2_time.pair.unwrap().current > 0f32 { print_message("Start TT Vanessa 2 Time"); trial_tower = true; timer::start() }
-                if tt_nonota_time.pair.unwrap().old == 0f32 && tt_nonota_time.pair.unwrap().current > 0f32 { print_message("Start TT Nonota Time"); trial_tower = true; timer::start() }
-                if tt_knight_time.pair.unwrap().old == 0f32 && tt_knight_time.pair.unwrap().current > 0f32 { print_message("Start TT Knight Time"); trial_tower = true; timer::start() }
-                if tt_seal_time.pair.unwrap().old == 0f32 && tt_seal_time.pair.unwrap().current > 0f32 { print_message("Start TT Seal Time"); trial_tower = true; timer::start() }
+                if tt_test_time.pair.unwrap().old == 0f32 && tt_test_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Test Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start()}
+                if tt_armor_time.pair.unwrap().old == 0f32 && tt_armor_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Armor Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_tania_time.pair.unwrap().old == 0f32 && tt_tania_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Tania Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_monica_time.pair.unwrap().old == 0f32 && tt_monica_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Monica Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_vanessa_1_time.pair.unwrap().old == 0f32 && tt_vanessa_1_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Vanessa 1 Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_vanessa_2_time.pair.unwrap().old == 0f32 && tt_vanessa_2_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Vanessa 2 Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_nonota_time.pair.unwrap().old == 0f32 && tt_nonota_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Nonota Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_knight_time.pair.unwrap().old == 0f32 && tt_knight_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Knight Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
+                if tt_seal_time.pair.unwrap().old == 0f32 && tt_seal_time.pair.unwrap().current > 0f32
+                { print_message("Start TT Seal Time"); trial_tower = true; souls_acquired[0] = souls_acquired[1]; timer::start() }
               }
             }
           }
