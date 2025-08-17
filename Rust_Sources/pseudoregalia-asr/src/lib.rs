@@ -688,6 +688,7 @@ async fn main() {
                                     && watch_fguid.pair.unwrap().changed_from(&5185712904977434514)
                                 {
                                     start();
+                                    print_message("Run Started");
                                     split_states.fill(0);
                                     watch_dream_breaker.update_infallible(0);
                                     set_variable_int("attack", 0);
@@ -754,12 +755,14 @@ async fn main() {
                                 if settings.reset
                                     && watch_fguid.pair.unwrap().changed_to(&5185712904977434514)
                                 {
+                                    print_message("Run Reset");
                                     reset()
                                 } else if settings.split {
                                     if settings.bailey_key
                                         && watch_bailey_key.pair.unwrap().changed_to(&true)
                                         && split_states[BAILEY_KEY] == 0
                                     {
+                                        print_message("Split: Bailey Key Pickup");
                                         split_states[BAILEY_KEY] = 1;
                                         split()
                                     }
@@ -767,6 +770,7 @@ async fn main() {
                                         && watch_underbelly_key.pair.unwrap().changed_to(&true)
                                         && split_states[UNDERBELLY_KEY] == 0
                                     {
+                                        print_message("Split: Underbelly Key Pickup");
                                         split_states[UNDERBELLY_KEY] = 1;
                                         split()
                                     }
@@ -774,6 +778,7 @@ async fn main() {
                                         && watch_tower_key.pair.unwrap().changed_to(&true)
                                         && split_states[TOWER_KEY] == 0
                                     {
+                                        print_message("Split: Tower Key Pickup");
                                         split_states[TOWER_KEY] = 1;
                                         split()
                                     }
@@ -781,6 +786,7 @@ async fn main() {
                                         && watch_keep_key.pair.unwrap().changed_to(&true)
                                         && split_states[KEEP_KEY] == 0
                                     {
+                                        print_message("Split: Keep Key Pickup");
                                         split_states[KEEP_KEY] = 1;
                                         split()
                                     }
@@ -788,6 +794,7 @@ async fn main() {
                                         && watch_theatre_key.pair.unwrap().changed_to(&true)
                                         && split_states[THEATRE_KEY] == 0
                                     {
+                                        print_message("Split: Theatre Key Pickup");
                                         split_states[THEATRE_KEY] = 1;
                                         split()
                                     }
@@ -797,6 +804,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[ATTACK] + 1))
                                     {
+                                        print_message("Split: Dream Breaker Pickup");
                                         split_states[ATTACK] =
                                             watch_dream_breaker.pair.unwrap().current;
                                         split()
@@ -807,6 +815,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[WALL_RIDE] + 1))
                                     {
+                                        print_message("Split: Cling Pickup");
                                         split_states[WALL_RIDE] = watch_cling.pair.unwrap().current;
                                         split()
                                     }
@@ -816,6 +825,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[AIR_KICK] + 1))
                                     {
+                                        print_message("Split: Sun Greaves Pickup");
                                         split_states[AIR_KICK] =
                                             watch_sun_greaves.pair.unwrap().current;
                                         split()
@@ -826,6 +836,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[SLIDE] + 1))
                                     {
+                                        print_message("Split: Slide Pickup");
                                         split_states[SLIDE] = watch_slide.pair.unwrap().current;
                                         split()
                                     }
@@ -835,6 +846,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[LIGHT] + 1))
                                     {
+                                        print_message("Split: Ascendant Light Pickup");
                                         split_states[LIGHT] =
                                             watch_ascendant_light.pair.unwrap().current;
                                         split()
@@ -845,6 +857,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[SLIDE_JUMP] + 1))
                                     {
+                                        print_message("Split: Solar Wind Pickup");
                                         split_states[SLIDE_JUMP] =
                                             watch_solar_wind.pair.unwrap().current;
                                         split()
@@ -855,6 +868,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[PLUNGE] + 1))
                                     {
+                                        print_message("Split: Sunsetter Pickup");
                                         split_states[PLUNGE] =
                                             watch_sunsetter.pair.unwrap().current;
                                         split()
@@ -865,6 +879,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[PROJECTILE] + 1))
                                     {
+                                        print_message("Split: Soul Cutter Pickup");
                                         split_states[PROJECTILE] =
                                             watch_soul_cutter.pair.unwrap().current;
                                         split()
@@ -875,6 +890,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[POWER_BOOST] + 1))
                                     {
+                                        print_message("Split: Indignation Pickup");
                                         split_states[POWER_BOOST] =
                                             watch_indignation.pair.unwrap().current;
                                         split()
@@ -885,6 +901,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[CHARGE_ATTACK] + 1))
                                     {
+                                        print_message("Split: Strikebreak Pickup");
                                         split_states[CHARGE_ATTACK] =
                                             watch_strikebreak.pair.unwrap().current;
                                         split()
@@ -895,6 +912,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[EXTRA_KICK] + 1))
                                     {
+                                        print_message("Split: Heliiacal Power Pickup");
                                         split_states[EXTRA_KICK] =
                                             watch_heliiacal_power.pair.unwrap().current;
                                         split()
@@ -905,6 +923,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[MAP] + 1))
                                     {
+                                        print_message("Split: Memento Pickup");
                                         split_states[MAP] = watch_memento.pair.unwrap().current;
                                         split()
                                     }
@@ -914,6 +933,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[AIR_RECOVERY] + 1))
                                     {
+                                        print_message("Split: Aerial Finesse Pickup");
                                         split_states[AIR_RECOVERY] =
                                             watch_aerial_finesse.pair.unwrap().current;
                                         split()
@@ -924,6 +944,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[MOBILE_HEAL] + 1))
                                     {
+                                        print_message("Split: Pilgrimage Pickup");
                                         split_states[MOBILE_HEAL] =
                                             watch_pilgrimage.pair.unwrap().current;
                                         split()
@@ -934,6 +955,11 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[MAGIC_HASTE] + 1))
                                     {
+                                        match watch_empathy.pair.unwrap().current {
+                                            1 => print_message("Split: Empathy Pickup #1"),
+                                            2 => print_message("Split: Empathy Pickup #2"),
+                                            _=> print_message("Split: Empathy Pickup #Error [Out of Bounds]"),
+                                        }
                                         split_states[MAGIC_HASTE] =
                                             watch_empathy.pair.unwrap().current;
                                         split()
@@ -944,6 +970,11 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[HEAL_BOOST] + 1))
                                     {
+                                        match watch_good_graces.pair.unwrap().current {
+                                            1 => print_message("Split: Good Graces Pickup #1"),
+                                            2 => print_message("Split: Good Graces Pickup #2"),
+                                            _=> print_message("Split: Good Graces Pickup #Error [Out of Bounds]"),
+                                        }
                                         split_states[HEAL_BOOST] =
                                             watch_good_graces.pair.unwrap().current;
                                         split()
@@ -954,6 +985,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[DAMAGE_BOOST] + 1))
                                     {
+                                        print_message("Split: Martial Prowess Pickup");
                                         split_states[DAMAGE_BOOST] =
                                             watch_martial_prowess.pair.unwrap().current;
                                         split()
@@ -964,6 +996,12 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[MAGIC_PIECE] + 1))
                                     {
+                                        match watch_clear_mind.pair.unwrap().current {
+                                            1 => print_message("Split: Clear Mind Pickup #1"),
+                                            2 => print_message("Split: Clear Mind Pickup #2"),
+                                            3 => print_message("Split: Clear Mind Pickup #3"),
+                                            _=> print_message("Split: Clear Mind Pickup #Error [Out of Bounds]"),
+                                        }
                                         split_states[MAGIC_PIECE] =
                                             watch_clear_mind.pair.unwrap().current;
                                         split()
@@ -974,6 +1012,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_PRO] + 1))
                                     {
+                                        print_message("Split: Outfit Professionalism Pickup");
                                         split_states[OUTFIT_PRO] =
                                             watch_outfit_professionalism.pair.unwrap().current;
                                         split()
@@ -984,6 +1023,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_SHOUJO] + 1))
                                     {
+                                        print_message("Split: Outfit Guardian Pickup");
                                         split_states[OUTFIT_SHOUJO] =
                                             watch_outfit_guardian.pair.unwrap().current;
                                         split()
@@ -994,6 +1034,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_KNIGHT] + 1))
                                     {
+                                        print_message("Split: Outfit Chivalry Pickup");
                                         split_states[OUTFIT_KNIGHT] =
                                             watch_outfit_chivalry.pair.unwrap().current;
                                         split()
@@ -1004,6 +1045,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_PAST] + 1))
                                     {
+                                        print_message("Split: Outfit Bleeding Heart Pickup");
                                         split_states[OUTFIT_PAST] =
                                             watch_outfit_bleeding_heart.pair.unwrap().current;
                                         split()
@@ -1014,6 +1056,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_JAM] + 1))
                                     {
+                                        print_message("Split: Outfit Nostalgia Pickup");
                                         split_states[OUTFIT_JAM] =
                                             watch_outfit_nostalgia.pair.unwrap().current;
                                         split()
@@ -1024,6 +1067,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_FAITH] + 1))
                                     {
+                                        print_message("Split: Outfit Devotion Pickup");
                                         split_states[OUTFIT_FAITH] =
                                             watch_outfit_devotion.pair.unwrap().current;
                                         split()
@@ -1034,6 +1078,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_CLASSY] + 1))
                                     {
+                                        print_message("Split: Outfit Class Pickup");
                                         split_states[OUTFIT_CLASSY] =
                                             watch_outfit_class.pair.unwrap().current;
                                         split()
@@ -1044,6 +1089,7 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[OUTFIT_SWEATER] + 1))
                                     {
+                                        print_message("Split: Outfit Sweater Pickup");
                                         split_states[OUTFIT_SWEATER] =
                                             watch_outfit_sweater.pair.unwrap().current;
                                         split()
@@ -1054,6 +1100,25 @@ async fn main() {
                                             .unwrap()
                                             .changed_to(&(split_states[HEALTH_UPGRADES] + 1))
                                     {
+                                        match watch_health_upgrade_count.pair.unwrap().current {
+                                            1 => print_message("Split: Health Upgrade Pickup #1"),
+                                            2 => print_message("Split: Health Upgrade Pickup #2"),
+                                            3 => print_message("Split: Health Upgrade Pickup #3"),
+                                            4 => print_message("Split: Health Upgrade Pickup #4"),
+                                            5 => print_message("Split: Health Upgrade Pickup #5"),
+                                            6 => print_message("Split: Health Upgrade Pickup #6"),
+                                            7 => print_message("Split: Health Upgrade Pickup #7"),
+                                            8 => print_message("Split: Health Upgrade Pickup #8"),
+                                            9 => print_message("Split: Health Upgrade Pickup #9"),
+                                            10 => print_message("Split: Health Upgrade Pickup #10"),
+                                            11 => print_message("Split: Health Upgrade Pickup #11"),
+                                            12 => print_message("Split: Health Upgrade Pickup #12"),
+                                            13 => print_message("Split: Health Upgrade Pickup #13"),
+                                            14 => print_message("Split: Health Upgrade Pickup #14"),
+                                            15 => print_message("Split: Health Upgrade Pickup #15"),
+                                            16 => print_message("Split: Health Upgrade Pickup #16"),
+                                            _=> print_message("Split: Health Upgrade Pickup #Error [Out of Bounds]"),
+                                        }
                                         split_states[HEALTH_UPGRADES] =
                                             watch_health_upgrade_count.pair.unwrap().current;
                                         split()
@@ -1065,6 +1130,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_dungeon, &area_castle)
                                         {
+                                            print_message("Split: Area Dungeon > Castle");
                                             split()
                                         }
                                         if settings.area_dungeon_underbelly
@@ -1073,6 +1139,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_dungeon, &area_underbelly)
                                         {
+                                            print_message("Split: Area Dungeon > Underbelly");
                                             split()
                                         }
                                         if settings.area_dungeon_theatre
@@ -1081,6 +1148,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_dungeon, &area_theatre)
                                         {
+                                            print_message("Split: Area Dungeon > Theatre");
                                             split()
                                         }
 
@@ -1090,6 +1158,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_castle, &area_dungeon)
                                         {
+                                            print_message("Split: Area Castle > Dungeon");
                                             split()
                                         }
                                         if settings.area_castle_bailey
@@ -1098,6 +1167,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_castle, &area_bailey)
                                         {
+                                            print_message("Split: Area Castle > Bailey");
                                             split()
                                         }
                                         if settings.area_castle_keep
@@ -1106,6 +1176,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_castle, &area_keep)
                                         {
+                                            print_message("Split: Area Castle > Keep");
                                             split()
                                         }
                                         if settings.area_castle_library
@@ -1114,6 +1185,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_castle, &area_library)
                                         {
+                                            print_message("Split: Area Castle > Library");
                                             split()
                                         }
                                         if settings.area_castle_theatre
@@ -1122,6 +1194,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_castle, &area_theatre)
                                         {
+                                            print_message("Split: Area Castle > Theatre");
                                             split()
                                         }
 
@@ -1131,6 +1204,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_library, &area_castle)
                                         {
+                                            print_message("Split: Area Library > Castle");
                                             split()
                                         }
 
@@ -1140,6 +1214,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_bailey, &area_castle)
                                         {
+                                            print_message("Split: Area Bailey > Castle");
                                             split()
                                         }
                                         if settings.area_bailey_underbelly
@@ -1148,6 +1223,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_bailey, &area_underbelly)
                                         {
+                                            print_message("Split: Area Bailey > Underbelly");
                                             split()
                                         }
                                         if settings.area_bailey_tower
@@ -1156,6 +1232,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_bailey, &area_tower)
                                         {
+                                            print_message("Split: Area Bailey > Tower");
                                             split()
                                         }
                                         if settings.area_bailey_theatre
@@ -1164,6 +1241,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_bailey, &area_theatre)
                                         {
+                                            print_message("Split: Area Bailey > Theatre");
                                             split()
                                         }
 
@@ -1173,6 +1251,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_keep, &area_castle)
                                         {
+                                            print_message("Split: Area Keep > Castle");
                                             split()
                                         }
                                         if settings.area_keep_underbelly
@@ -1181,6 +1260,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_keep, &area_underbelly)
                                         {
+                                            print_message("Split: Area Keep > Underbelly");
                                             split()
                                         }
                                         if settings.area_keep_theatre
@@ -1189,6 +1269,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_keep, &area_theatre)
                                         {
+                                            print_message("Split: Area Keep > Theatre");
                                             split()
                                         }
 
@@ -1198,6 +1279,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_underbelly, &area_dungeon)
                                         {
+                                            print_message("Split: Area Underbelly > Dungeon");
                                             split()
                                         }
                                         if settings.area_underbelly_bailey
@@ -1206,6 +1288,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_underbelly, &area_bailey)
                                         {
+                                            print_message("Split: Area Underbelly > Bailey");
                                             split()
                                         }
                                         if settings.area_underbelly_keep
@@ -1214,6 +1297,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_underbelly, &area_keep)
                                         {
+                                            print_message("Split: Area Underbelly > Keep");
                                             split()
                                         }
 
@@ -1223,6 +1307,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_theatre, &area_dungeon)
                                         {
+                                            print_message("Split: Area Theatre > Dungeon");
                                             split()
                                         }
                                         if settings.area_theatre_castle
@@ -1231,6 +1316,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_theatre, &area_castle)
                                         {
+                                            print_message("Split: Area Theatre > Castle");
                                             split()
                                         }
                                         if settings.area_theatre_bailey
@@ -1239,6 +1325,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_theatre, &area_bailey)
                                         {
+                                            print_message("Split: Area Theatre > Bailey");
                                             split()
                                         }
                                         if settings.area_theatre_keep
@@ -1247,6 +1334,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_theatre, &area_keep)
                                         {
+                                            print_message("Split: Area Theatre > Keep");
                                             split()
                                         }
 
@@ -1256,6 +1344,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_tower, &area_bailey)
                                         {
+                                            print_message("Split: Area Tower > Bailey");
                                             split()
                                         }
                                         if settings.area_tower_boss
@@ -1264,6 +1353,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_tower, &area_princess)
                                         {
+                                            print_message("Split: Area Tower > Princess");
                                             split()
                                         }
 
@@ -1273,6 +1363,7 @@ async fn main() {
                                                 .unwrap()
                                                 .changed_from_to(&area_princess, &area_tower)
                                         {
+                                            print_message("Split: Area Princess > Tower");
                                             split()
                                         }
                                     }
@@ -1280,21 +1371,59 @@ async fn main() {
                                         && watch_final_boss_hp.pair.unwrap().current <= 0f64
                                         && watch_boss_phase.pair.unwrap().current == 1
                                     {
+                                        print_message("Split: Boss Defeated (Repeat)");
                                         split()
                                     }
                                     if watch_current_outfit.pair.unwrap().changed() {
                                         match watch_current_outfit.pair.clone().unwrap().current.as_str() {
-                                            "Base" => if settings.equip_default {split()}
-                                            "glove" => if settings.equip_cling {split()}
-                                            "greaves" => if settings.equip_greaves {split()}
-                                            "pro" => if settings.equip_professionalism {split()}
-                                            "pants" => if settings.equip_pants {split()}
-                                            "nun" => if settings.equip_devotion {split()}
-                                            "shoujo" => if settings.equip_guardian {split()}
-                                            "knight" => if settings.equip_chivalry {split()}
-                                            "past" => if settings.equip_bleeding_heart {split()}
-                                            "Class" => if settings.equip_class {split()}
-                                            "sweater" => if settings.equip_sweater {split()}
+                                            "Base" => if settings.equip_default {
+                                                print_message("Split: Outfit Change > Basic Vest");
+                                                split()
+                                            }
+                                            "glove" => if settings.equip_cling {
+                                                print_message("Split: Outfit Change > Cling Sleeve");
+                                                split()
+                                            }
+                                            "greaves" => if settings.equip_greaves {
+                                                print_message("Split: Outfit Change > Sun Greaves");
+                                                split()
+                                            }
+                                            "pro" => if settings.equip_professionalism {
+                                                print_message("Split: Outfit Change > Professional");
+                                                split()
+                                            }
+                                            "pants" => if settings.equip_pants {
+                                                print_message("Split: Outfit Change > Big Pants");
+                                                split()
+                                            }
+                                            "nun" => if settings.equip_devotion {
+                                                print_message("Split: Outfit Change > Sol Sister");
+                                                split()
+                                            }
+                                            "shoujo" => if settings.equip_guardian {
+                                                print_message("Split: Outfit Change > Guardian");
+                                                split()
+                                            }
+                                            "knight" => if settings.equip_chivalry {
+                                                print_message("Split: Outfit Change > Soldier");
+                                                split()
+                                            }
+                                            "past" => if settings.equip_bleeding_heart {
+                                                print_message("Split: Outfit Change > Bleeding Heart");
+                                                split()
+                                            }
+                                            "jam" => if settings.equip_nostalgia {
+                                                print_message("Split: Outfit Change > XIX");
+                                                split()
+                                            }
+                                            "Class" => if settings.equip_class {
+                                                print_message("Split: Outfit Change > Classy");
+                                                split()
+                                            }
+                                            "sweater" => if settings.equip_sweater {
+                                                print_message("Split: Outfit Change > Sleepytime");
+                                                split()
+                                            }
                                             _=> {}
                                         }
                                     }
