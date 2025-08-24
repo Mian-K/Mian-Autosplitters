@@ -1,6 +1,35 @@
 pub fn get_offsets(version: &GameVersion) -> Offsets {
     match version {
-        // Full Gold Patch
+        GameVersion::GameJam => Offsets {
+            big_key_bailey: [0, 0x1B8, 0x341],
+            big_key_underbelly: [0, 0x1B8, 0x342],
+            big_key_tower: [0, 0x1B8, 0x343],
+            big_key_keep: [0, 0x1B8, 0x344],
+            upgrade_tracker: [0, 0x1B8, 0x1E0],
+            silver_keys: [0, 0x1B8, 0x1D0],
+            health_upgrade_count: [0, 0x1B8, 0x268],
+            fguid: [0, 0x30, 0x210],
+            area_name: [0, 0x1B8, 0x2A8, 0x0],
+            big_key_theatre: [1, 1, 1],
+            boss_phase: [1, 1, 1, 1, 1],
+            final_boss_hp: [1, 1, 1, 1, 1, 1],
+            current_outfit: [1, 1, 1],
+        },
+        GameVersion::EarlyFGP => Offsets {
+            big_key_bailey: [0, 0x1B8, 0x341],
+            big_key_underbelly: [0, 0x1B8, 0x342],
+            big_key_tower: [0, 0x1B8, 0x343],
+            big_key_keep: [0, 0x1B8, 0x344],
+            big_key_theatre: [0, 0x1B8, 0x490],
+            upgrade_tracker: [0, 0x1B8, 0x1E0],
+            boss_phase: [0, 0x30, 0xE8, 0x2A8, 0x764],
+            silver_keys: [0, 0x1B8, 0x1D0],
+            health_upgrade_count: [0, 0x1B8, 0x268],
+            fguid: [0, 0x30, 0x210],
+            final_boss_hp: [0, 0x30, 0xE8, 0x2A8, 0x638, 0xA8],
+            area_name: [0, 0x1B8, 0x2A8, 0x0],
+            current_outfit: [0, 0x1B8, 0x494],
+        },
         GameVersion::FullGoldPatch => Offsets {
             big_key_bailey: [0, 0x1B8, 0x339],
             big_key_underbelly: [0, 0x1B8, 0x33A],
@@ -33,9 +62,12 @@ pub fn get_offsets(version: &GameVersion) -> Offsets {
         },
     }
 }
+#[derive(PartialEq, Eq)]
 pub enum GameVersion {
-    FullGoldPatch = 0,
-    MapUpdate = 1,
+    GameJam = 0,
+    EarlyFGP = 1,
+    FullGoldPatch = 2,
+    MapUpdate = 3,
 }
 pub(crate) struct Offsets {
     pub big_key_bailey: [u64; 3],
