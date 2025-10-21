@@ -96,38 +96,38 @@ async fn main() {
                 let mut watch_tower_key: Watcher<bool> = Watcher::new();
                 let mut watch_keep_key: Watcher<bool> = Watcher::new();
                 let mut watch_theatre_key: Watcher<bool> = Watcher::new();
-                let mut watch_dream_breaker: Watcher<i32> = Watcher::new();
-                let mut watch_cling: Watcher<i32> = Watcher::new();
-                let mut watch_sun_greaves: Watcher<i32> = Watcher::new();
-                let mut watch_slide: Watcher<i32> = Watcher::new();
-                let mut watch_ascendant_light: Watcher<i32> = Watcher::new();
-                let mut watch_solar_wind: Watcher<i32> = Watcher::new();
-                let mut watch_sunsetter: Watcher<i32> = Watcher::new();
-                let mut watch_soul_cutter: Watcher<i32> = Watcher::new();
-                let mut watch_indignation: Watcher<i32> = Watcher::new();
-                let mut watch_strikebreak: Watcher<i32> = Watcher::new();
-                let mut watch_heliiacal_power: Watcher<i32> = Watcher::new();
-                let mut watch_memento: Watcher<i32> = Watcher::new();
-                let mut watch_aerial_finesse: Watcher<i32> = Watcher::new();
-                let mut watch_pilgrimage: Watcher<i32> = Watcher::new();
-                let mut watch_empathy: Watcher<i32> = Watcher::new();
-                let mut watch_good_graces: Watcher<i32> = Watcher::new();
-                let mut watch_martial_prowess: Watcher<i32> = Watcher::new();
-                let mut watch_clear_mind: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_professionalism: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_guardian: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_chivalry: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_bleeding_heart: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_nostalgia: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_devotion: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_class: Watcher<i32> = Watcher::new();
-                let mut watch_outfit_sweater: Watcher<i32> = Watcher::new();
-                let mut watch_boss_phase: Watcher<i32> = Watcher::new();
+                let mut dream_breaker: i32 = 0;
+                let mut cling: i32 = 0;
+                let mut sun_greaves: i32 = 0;
+                let mut slide: i32 = 0;
+                let mut ascendant_light: i32 = 0;
+                let mut solar_wind: i32 = 0;
+                let mut sunsetter: i32 = 0;
+                let mut soul_cutter: i32 = 0;
+                let mut indignation: i32 = 0;
+                let mut strikebreak: i32 = 0;
+                let mut heliiacal_power: i32 = 0;
+                let mut memento: i32 = 0;
+                let mut aerial_finesse: i32 = 0;
+                let mut pilgrimage: i32 = 0;
+                let mut empathy: i32 = 0;
+                let mut good_graces: i32 = 0;
+                let mut martial_prowess: i32 = 0;
+                let mut clear_mind: i32 = 0;
+                let mut outfit_professionalism: i32 = 0;
+                let mut outfit_guardian: i32 = 0;
+                let mut outfit_chivalry: i32 = 0;
+                let mut outfit_bleeding_heart: i32 = 0;
+                let mut outfit_nostalgia: i32 = 0;
+                let mut outfit_devotion: i32 = 0;
+                let mut outfit_class: i32 = 0;
+                let mut outfit_sweater: i32 = 0;
                 let mut watch_current_silver_keys: Watcher<i32> = Watcher::new();
-                let mut watch_total_silver_keys: Watcher<i32> = Watcher::new();
-                let mut watch_health_upgrade_count: Watcher<i32> = Watcher::new();
+                let mut total_silver_keys: i32 = 0;
+                let mut health_upgrade_count: i32 = 0;
                 let mut watch_fguid: Watcher<u64> = Watcher::new();
                 let mut watch_final_boss_hp: Watcher<f64> = Watcher::new();
+                let mut watch_boss_phase: Watcher<i32> = Watcher::new();
                 let mut watch_area_name: Watcher<ArrayString<20>> = Watcher::new();
                 let mut watch_current_outfit: Watcher<ArrayString<7>> = Watcher::new();
                 let mut watch_jam_final: Watcher<bool> = Watcher::new();
@@ -137,38 +137,9 @@ async fn main() {
                 watch_tower_key.update_infallible(false);
                 watch_keep_key.update_infallible(false);
                 watch_theatre_key.update_infallible(false);
-                watch_dream_breaker.update_infallible(0);
-                watch_cling.update_infallible(0);
-                watch_sun_greaves.update_infallible(0);
-                watch_slide.update_infallible(0);
-                watch_ascendant_light.update_infallible(0);
-                watch_solar_wind.update_infallible(0);
-                watch_sunsetter.update_infallible(0);
-                watch_soul_cutter.update_infallible(0);
-                watch_indignation.update_infallible(0);
-                watch_strikebreak.update_infallible(0);
-                watch_heliiacal_power.update_infallible(0);
-                watch_memento.update_infallible(0);
-                watch_aerial_finesse.update_infallible(0);
-                watch_pilgrimage.update_infallible(0);
-                watch_empathy.update_infallible(0);
-                watch_good_graces.update_infallible(0);
-                watch_martial_prowess.update_infallible(0);
-                watch_clear_mind.update_infallible(0);
-                watch_outfit_professionalism.update_infallible(0);
-                watch_outfit_guardian.update_infallible(0);
-                watch_outfit_chivalry.update_infallible(0);
-                watch_outfit_bleeding_heart.update_infallible(0);
-                watch_outfit_nostalgia.update_infallible(0);
-                watch_outfit_devotion.update_infallible(0);
-                watch_outfit_class.update_infallible(0);
-                watch_outfit_sweater.update_infallible(0);
-                watch_boss_phase.update_infallible(0);
-                watch_current_silver_keys.update_infallible(0);
-                watch_total_silver_keys.update_infallible(0);
-                watch_health_upgrade_count.update_infallible(0);
                 watch_fguid.update_infallible(0);
                 watch_final_boss_hp.update_infallible(1500f64);
+                watch_boss_phase.update_infallible(0);
                 watch_area_name.update_infallible(ArrayString::new());
                 watch_current_outfit.update_infallible(ArrayString::from(&"Base").unwrap());
                 watch_jam_final.update_infallible(false);
@@ -268,7 +239,7 @@ async fn main() {
                             ) {
                                 if let Ok(f_name) = module.get_fname::<13>(&process, f_name_key)
                                 {
-                                    let f_name = f_name.validate_utf8().unwrap_or_default();
+                                    let f_name = f_name.validate_utf8().unwrap_or("");
                                     off[3] = off[3] + 8;
                                     match f_name {
                                         "attack" => cache_upgrades_f_name[ATTACK] = f_name_key,
@@ -342,7 +313,7 @@ async fn main() {
                                         _ => {}
                                     }
                                 }
-                                if cache_upgrades_f_name.contains(&f_name_key) {
+                                if f_name_key != FNameKey::default() && cache_upgrades_f_name.contains(&f_name_key) {
                                     if let Ok(flag) = process.read_pointer_path::<i32>(
                                         module.g_world(),
                                         Bit64,
@@ -354,111 +325,111 @@ async fn main() {
                                           .unwrap()
                                         {
                                             ATTACK => {
-                                                watch_dream_breaker.update_infallible(flag);
+                                                dream_breaker = flag;
                                                 set_variable_int("attack", flag);
                                             }
                                             WALL_RIDE => {
-                                                watch_cling.update_infallible(flag);
+                                                cling = flag;
                                                 set_variable_int("wallRide", flag);
                                             }
                                             AIR_KICK => {
-                                                watch_sun_greaves.update_infallible(flag);
+                                                sun_greaves = flag;
                                                 set_variable_int("airKick", flag);
                                             }
                                             SLIDE => {
-                                                watch_slide.update_infallible(flag);
+                                                slide = flag;
                                                 set_variable_int("slide", flag);
                                             }
                                             LIGHT => {
-                                                watch_ascendant_light.update_infallible(flag);
+                                                ascendant_light = flag;
                                                 set_variable_int("Light", flag);
                                             }
                                             SLIDE_JUMP => {
                                                 if GameVersion::GameJam == version { break; }
-                                                watch_solar_wind.update_infallible(flag);
+                                                solar_wind = flag;
                                                 set_variable_int("SlideJump", flag);
                                             }
                                             PLUNGE => {
-                                                watch_sunsetter.update_infallible(flag);
+                                                sunsetter = flag;
                                                 set_variable_int("plunge", flag);
                                             }
                                             PROJECTILE => {
-                                                watch_soul_cutter.update_infallible(flag);
+                                                soul_cutter = flag;
                                                 set_variable_int("projectile", flag);
                                             }
                                             POWER_BOOST => {
-                                                watch_indignation.update_infallible(flag);
+                                                indignation = flag;
                                                 set_variable_int("powerBoost", flag);
                                             }
                                             CHARGE_ATTACK => {
-                                                watch_strikebreak.update_infallible(flag);
+                                                strikebreak = flag;
                                                 set_variable_int("chargeAttack", flag);
                                             }
                                             EXTRA_KICK => {
-                                                watch_heliiacal_power.update_infallible(flag);
+                                                heliiacal_power = flag;
                                                 set_variable_int("extraKick", flag);
                                             }
                                             MAP => {
                                                 if GameVersion::MapUpdate != version { break; }
-                                                watch_memento.update_infallible(flag);
+                                                memento = flag;
                                                 set_variable_int("Map", flag);
                                             }
                                             AIR_RECOVERY => {
-                                                watch_aerial_finesse.update_infallible(flag);
+                                                aerial_finesse = flag;
                                                 set_variable_int("airRecovery", flag);
                                             }
                                             MOBILE_HEAL => {
-                                                watch_pilgrimage.update_infallible(flag);
+                                                pilgrimage = flag;
                                                 set_variable_int("mobileHeal", flag);
                                             }
                                             MAGIC_HASTE => {
-                                                watch_empathy.update_infallible(flag);
+                                                empathy = flag;
                                                 set_variable_int("magicHaste", flag);
                                             }
                                             HEAL_BOOST => {
-                                                watch_good_graces.update_infallible(flag);
+                                                good_graces = flag;
                                                 set_variable_int("HealBoost", flag);
                                             }
                                             DAMAGE_BOOST => {
-                                                watch_martial_prowess.update_infallible(flag);
+                                                martial_prowess = flag;
                                                 set_variable_int("damageBoost", flag);
                                             }
                                             MAGIC_PIECE => {
-                                                watch_clear_mind.update_infallible(flag);
+                                                clear_mind = flag;
                                                 set_variable_int("magicPiece", flag);
                                             }
                                             OUTFIT_PRO => {
-                                                watch_outfit_professionalism
-                                                  .update_infallible(flag);
+                                                outfit_professionalism
+                                                   = flag;
                                                 set_variable_int("outfitPro", flag);
                                             }
                                             OUTFIT_SHOUJO => {
-                                                watch_outfit_guardian.update_infallible(flag);
+                                                outfit_guardian = flag;
                                                 set_variable_int("outfitShoujo", flag);
                                             }
                                             OUTFIT_KNIGHT => {
-                                                watch_outfit_chivalry.update_infallible(flag);
+                                                outfit_chivalry = flag;
                                                 set_variable_int("outfitKnight", flag);
                                             }
                                             OUTFIT_PAST => {
-                                                watch_outfit_bleeding_heart
-                                                  .update_infallible(flag);
+                                                outfit_bleeding_heart
+                                                   = flag;
                                                 set_variable_int("outfitPast", flag);
                                             }
                                             OUTFIT_JAM => {
-                                                watch_outfit_nostalgia.update_infallible(flag);
+                                                outfit_nostalgia = flag;
                                                 set_variable_int("outfitJam", flag);
                                             }
                                             OUTFIT_FAITH => {
-                                                watch_outfit_devotion.update_infallible(flag);
+                                                outfit_devotion = flag;
                                                 set_variable_int("outfitFaith", flag);
                                             }
                                             OUTFIT_CLASSY => {
-                                                watch_outfit_class.update_infallible(flag);
+                                                outfit_class = flag;
                                                 set_variable_int("outfitClassy", flag);
                                             }
                                             OUTFIT_SWEATER => {
-                                                watch_outfit_sweater.update_infallible(flag);
+                                                outfit_sweater = flag;
                                                 set_variable_int("outfitSweater", flag);
                                             }
                                             _ => {}
@@ -484,22 +455,17 @@ async fn main() {
                     ) {
                         watch_current_silver_keys.update_infallible(flag);
                         if watch_current_silver_keys.pair.unwrap().increased() {
-                            watch_total_silver_keys.update_infallible(
-                                watch_total_silver_keys.pair.unwrap().current + 1,
-                            );
+                            total_silver_keys = total_silver_keys + 1;
                         }
                         set_variable_int("Current Keys", flag);
-                        set_variable_int(
-                            "Total Keys",
-                            watch_total_silver_keys.pair.unwrap().current,
-                        );
+                        set_variable_int("Total Keys", total_silver_keys);
                     }
                     if let Ok(flag) = process.read_pointer_path::<i32>(
                         module.g_world(),
                         Bit64,
                         &offsets.health_upgrade_count,
                     ) {
-                        watch_health_upgrade_count.update_infallible(flag);
+                        health_upgrade_count = flag;
                         set_variable_int("Health Upgrades", flag);
                     }
                     if let Ok(flag) = process.read_pointer_path::<u64>(
@@ -655,39 +621,33 @@ async fn main() {
                     if just_started {
                         just_started = false;
 
-                        split_states[ATTACK] = watch_dream_breaker.pair.unwrap().current;
-                        split_states[WALL_RIDE] = watch_cling.pair.unwrap().current;
-                        split_states[AIR_KICK] = watch_sun_greaves.pair.unwrap().current;
-                        split_states[SLIDE] = watch_slide.pair.unwrap().current;
-                        split_states[LIGHT] = watch_ascendant_light.pair.unwrap().current;
-                        split_states[SLIDE_JUMP] = watch_solar_wind.pair.unwrap().current;
-                        split_states[PLUNGE] = watch_sunsetter.pair.unwrap().current;
-                        split_states[PROJECTILE] = watch_soul_cutter.pair.unwrap().current;
-                        split_states[POWER_BOOST] = watch_indignation.pair.unwrap().current;
-                        split_states[CHARGE_ATTACK] = watch_strikebreak.pair.unwrap().current;
-                        split_states[EXTRA_KICK] = watch_heliiacal_power.pair.unwrap().current;
-                        split_states[MAP] = watch_memento.pair.unwrap().current;
-                        split_states[AIR_RECOVERY] = watch_aerial_finesse.pair.unwrap().current;
-                        split_states[MOBILE_HEAL] = watch_pilgrimage.pair.unwrap().current;
-                        split_states[MAGIC_HASTE] = watch_empathy.pair.unwrap().current;
-                        split_states[HEAL_BOOST] = watch_good_graces.pair.unwrap().current;
-                        split_states[DAMAGE_BOOST] =
-                          watch_martial_prowess.pair.unwrap().current;
-                        split_states[MAGIC_PIECE] = watch_clear_mind.pair.unwrap().current;
-                        split_states[OUTFIT_PRO] =
-                          watch_outfit_professionalism.pair.unwrap().current;
-                        split_states[OUTFIT_SHOUJO] =
-                          watch_outfit_guardian.pair.unwrap().current;
-                        split_states[OUTFIT_KNIGHT] =
-                          watch_outfit_chivalry.pair.unwrap().current;
-                        split_states[OUTFIT_PAST] =
-                          watch_outfit_bleeding_heart.pair.unwrap().current;
-                        split_states[OUTFIT_JAM] = watch_outfit_nostalgia.pair.unwrap().current;
-                        split_states[OUTFIT_FAITH] =
-                          watch_outfit_devotion.pair.unwrap().current;
-                        split_states[OUTFIT_CLASSY] = watch_outfit_class.pair.unwrap().current;
-                        split_states[OUTFIT_SWEATER] =
-                          watch_outfit_sweater.pair.unwrap().current;
+                        split_states[ATTACK] = dream_breaker;
+                        split_states[WALL_RIDE] = cling;
+                        split_states[AIR_KICK] = sun_greaves;
+                        split_states[SLIDE] = slide;
+                        split_states[LIGHT] = ascendant_light;
+                        split_states[SLIDE_JUMP] = solar_wind;
+                        split_states[PLUNGE] = sunsetter;
+                        split_states[PROJECTILE] = soul_cutter;
+                        split_states[POWER_BOOST] = indignation;
+                        split_states[CHARGE_ATTACK] = strikebreak;
+                        split_states[EXTRA_KICK] = heliiacal_power;
+                        split_states[MAP] = memento;
+                        split_states[AIR_RECOVERY] = aerial_finesse;
+                        split_states[MOBILE_HEAL] = pilgrimage;
+                        split_states[MAGIC_HASTE] = empathy;
+                        split_states[HEAL_BOOST] = good_graces;
+                        split_states[DAMAGE_BOOST] = martial_prowess;
+                        split_states[MAGIC_PIECE] = clear_mind;
+                        split_states[OUTFIT_PRO] = outfit_professionalism;
+                        split_states[OUTFIT_SHOUJO] = outfit_guardian;
+                        split_states[OUTFIT_KNIGHT] = outfit_chivalry;
+                        split_states[OUTFIT_PAST] = outfit_bleeding_heart;
+                        split_states[OUTFIT_JAM] = outfit_nostalgia;
+                        split_states[OUTFIT_FAITH] = outfit_devotion;
+                        split_states[OUTFIT_CLASSY] = outfit_class;
+                        split_states[OUTFIT_SWEATER] = outfit_sweater;
+                        split_states[HEALTH_UPGRADES] = health_upgrade_count;
                         if watch_bailey_key.pair.unwrap().current {
                             split_states[BAILEY_KEY] = 1
                         } else {
@@ -713,12 +673,10 @@ async fn main() {
                         } else {
                             split_states[THEATRE_KEY] = 0
                         }
-                        split_states[HEALTH_UPGRADES] =
-                          watch_health_upgrade_count.pair.unwrap().current;
                     }
                     match state() {
                         TimerState::NotRunning => {
-                            watch_total_silver_keys.update_infallible(0);
+                            total_silver_keys = 0;
                             watch_area_name.update_infallible(ArrayString::new());
                             if settings.start
                               && watch_fguid.pair.unwrap().changed_from(&5185712904977434514)
@@ -726,57 +684,57 @@ async fn main() {
                                 start();
                                 print_message("Run Started");
                                 split_states.fill(0);
-                                watch_dream_breaker.update_infallible(0);
+                                dream_breaker = 0;
                                 set_variable_int("attack", 0);
-                                watch_cling.update_infallible(0);
+                                cling = 0;
                                 set_variable_int("wallRide", 0);
-                                watch_sun_greaves.update_infallible(0);
+                                sun_greaves = 0;
                                 set_variable_int("airKick", 0);
-                                watch_slide.update_infallible(0);
+                                slide = 0;
                                 set_variable_int("slide", 0);
-                                watch_ascendant_light.update_infallible(0);
+                                ascendant_light = 0;
                                 set_variable_int("Light", 0);
-                                watch_solar_wind.update_infallible(0);
+                                solar_wind = 0;
                                 set_variable_int("SlideJump", 0);
-                                watch_sunsetter.update_infallible(0);
+                                sunsetter = 0;
                                 set_variable_int("plunge", 0);
-                                watch_soul_cutter.update_infallible(0);
+                                soul_cutter = 0;
                                 set_variable_int("projectile", 0);
-                                watch_indignation.update_infallible(0);
+                                indignation = 0;
                                 set_variable_int("powerBoost", 0);
-                                watch_strikebreak.update_infallible(0);
+                                strikebreak = 0;
                                 set_variable_int("chargeAttack", 0);
-                                watch_heliiacal_power.update_infallible(0);
+                                heliiacal_power = 0;
                                 set_variable_int("extraKick", 0);
-                                watch_memento.update_infallible(0);
+                                memento = 0;
                                 set_variable_int("Map", 0);
-                                watch_aerial_finesse.update_infallible(0);
+                                aerial_finesse = 0;
                                 set_variable_int("airRecovery", 0);
-                                watch_pilgrimage.update_infallible(0);
+                                pilgrimage = 0;
                                 set_variable_int("mobileHeal", 0);
-                                watch_empathy.update_infallible(0);
+                                empathy = 0;
                                 set_variable_int("magicHaste", 0);
-                                watch_good_graces.update_infallible(0);
+                                good_graces = 0;
                                 set_variable_int("HealBoost", 0);
-                                watch_martial_prowess.update_infallible(0);
+                                martial_prowess = 0;
                                 set_variable_int("damageBoost", 0);
-                                watch_clear_mind.update_infallible(0);
+                                clear_mind = 0;
                                 set_variable_int("magicPiece", 0);
-                                watch_outfit_professionalism.update_infallible(0);
+                                outfit_professionalism = 0;
                                 set_variable_int("outfitPro", 0);
-                                watch_outfit_guardian.update_infallible(0);
+                                outfit_guardian = 0;
                                 set_variable_int("outfitShoujo", 0);
-                                watch_outfit_chivalry.update_infallible(0);
+                                outfit_chivalry = 0;
                                 set_variable_int("outfitKnight", 0);
-                                watch_outfit_bleeding_heart.update_infallible(0);
+                                outfit_bleeding_heart = 0;
                                 set_variable_int("outfitPast", 0);
-                                watch_outfit_nostalgia.update_infallible(0);
+                                outfit_nostalgia = 0;
                                 set_variable_int("outfitJam", 0);
-                                watch_outfit_devotion.update_infallible(0);
+                                outfit_devotion = 0;
                                 set_variable_int("outfitFaith", 0);
-                                watch_outfit_class.update_infallible(0);
+                                outfit_class = 0;
                                 set_variable_int("outfitClassy", 0);
-                                watch_outfit_sweater.update_infallible(0);
+                                outfit_sweater = 0;
                                 set_variable_int("outfitSweater", 0);
                                 watch_current_outfit
                                   .update_infallible(ArrayString::from(&"Base").unwrap());
@@ -784,6 +742,8 @@ async fn main() {
                                 watch_jam_final.update_infallible(false);
                                 set_variable("Game Jam Final", "False");
                                 just_started = true;
+
+                                // Need to delay to prevent weirdness during start.
                                 next_tick().await;
                                 next_tick().await;
                                 next_tick().await;
@@ -837,308 +797,204 @@ async fn main() {
                                     split()
                                 }
                                 if settings.dream_breaker
-                                  && watch_dream_breaker
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[ATTACK] + 1))
+                                  && number_in_range(dream_breaker - split_states[ATTACK],1,3)
                                 {
                                     print_message("Split: Dream Breaker Pickup");
-                                    split_states[ATTACK] =
-                                      watch_dream_breaker.pair.unwrap().current;
+                                    split_states[ATTACK] = dream_breaker;
                                     split()
                                 }
                                 if settings.cling
-                                  && watch_cling
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[WALL_RIDE] + 1))
+                                  && number_in_range(cling - split_states[WALL_RIDE],1,3)
                                 {
                                     print_message("Split: Cling Pickup");
-                                    split_states[WALL_RIDE] = watch_cling.pair.unwrap().current;
+                                    split_states[WALL_RIDE] = cling;
                                     split()
                                 }
                                 if settings.sun_greaves
-                                  && watch_sun_greaves
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[AIR_KICK] + 1))
+                                  && number_in_range(sun_greaves - split_states[AIR_KICK] ,1,3)
                                 {
                                     print_message("Split: Sun Greaves Pickup");
-                                    split_states[AIR_KICK] =
-                                      watch_sun_greaves.pair.unwrap().current;
+                                    split_states[AIR_KICK] = sun_greaves;
                                     split()
                                 }
                                 if settings.slide
-                                  && watch_slide
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[SLIDE] + 1))
+                                  && number_in_range(slide - split_states[SLIDE],1,3)
                                 {
                                     print_message("Split: Slide Pickup");
-                                    split_states[SLIDE] = watch_slide.pair.unwrap().current;
+                                    split_states[SLIDE] = slide;
                                     split()
                                 }
                                 if settings.ascendant_light
-                                  && watch_ascendant_light
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[LIGHT] + 1))
+                                  && number_in_range(ascendant_light - split_states[LIGHT],1,3)
                                 {
                                     print_message("Split: Ascendant Light Pickup");
-                                    split_states[LIGHT] =
-                                      watch_ascendant_light.pair.unwrap().current;
+                                    split_states[LIGHT] = ascendant_light;
                                     split()
                                 }
                                 if settings.solar_wind
-                                  && watch_solar_wind
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[SLIDE_JUMP] + 1))
+                                  && number_in_range(solar_wind - split_states[SLIDE_JUMP],1,3)
                                 {
                                     print_message("Split: Solar Wind Pickup");
-                                    split_states[SLIDE_JUMP] =
-                                      watch_solar_wind.pair.unwrap().current;
+                                    split_states[SLIDE_JUMP] = solar_wind;
                                     split()
                                 }
                                 if settings.sunsetter
-                                  && watch_sunsetter
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[PLUNGE] + 1))
+                                  && number_in_range(sunsetter - split_states[PLUNGE],1,3)
                                 {
                                     print_message("Split: Sunsetter Pickup");
-                                    split_states[PLUNGE] =
-                                      watch_sunsetter.pair.unwrap().current;
+                                    split_states[PLUNGE] = sunsetter;
                                     split()
                                 }
                                 if settings.soul_cutter
-                                  && watch_soul_cutter
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[PROJECTILE] + 1))
+                                  && number_in_range(soul_cutter - split_states[PROJECTILE],1,3)
                                 {
                                     print_message("Split: Soul Cutter Pickup");
-                                    split_states[PROJECTILE] =
-                                      watch_soul_cutter.pair.unwrap().current;
+                                    split_states[PROJECTILE] = soul_cutter;
                                     split()
                                 }
                                 if settings.indignation
-                                  && watch_indignation
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[POWER_BOOST] + 1))
+                                  && number_in_range(indignation - split_states[POWER_BOOST],1,3)
                                 {
                                     print_message("Split: Indignation Pickup");
-                                    split_states[POWER_BOOST] =
-                                      watch_indignation.pair.unwrap().current;
+                                    split_states[POWER_BOOST] = indignation;
                                     split()
                                 }
                                 if settings.strikebreak
-                                  && watch_strikebreak
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[CHARGE_ATTACK] + 1))
+                                  && number_in_range(strikebreak - split_states[CHARGE_ATTACK],1,3)
                                 {
                                     print_message("Split: Strikebreak Pickup");
-                                    split_states[CHARGE_ATTACK] =
-                                      watch_strikebreak.pair.unwrap().current;
+                                    split_states[CHARGE_ATTACK] = strikebreak;
                                     split()
                                 }
                                 if settings.heliiacal_power
-                                  && watch_heliiacal_power
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[EXTRA_KICK] + 1))
+                                  && number_in_range(heliiacal_power - split_states[EXTRA_KICK],1,3)
                                 {
                                     print_message("Split: Heliiacal Power Pickup");
-                                    split_states[EXTRA_KICK] =
-                                      watch_heliiacal_power.pair.unwrap().current;
+                                    split_states[EXTRA_KICK] = heliiacal_power;
                                     split()
                                 }
                                 if settings.memento
-                                  && watch_memento
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[MAP] + 1))
+                                  && number_in_range(memento - split_states[MAP],1,3)
                                 {
                                     print_message("Split: Memento Pickup");
-                                    split_states[MAP] = watch_memento.pair.unwrap().current;
+                                    split_states[MAP] = memento;
                                     split()
                                 }
                                 if settings.aerial_finesse
-                                  && watch_aerial_finesse
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[AIR_RECOVERY] + 1))
+                                  && number_in_range(aerial_finesse - split_states[AIR_RECOVERY],1,3)
                                 {
                                     print_message("Split: Aerial Finesse Pickup");
-                                    split_states[AIR_RECOVERY] =
-                                      watch_aerial_finesse.pair.unwrap().current;
+                                    split_states[AIR_RECOVERY] = aerial_finesse;
                                     split()
                                 }
                                 if settings.pilgrimage
-                                  && watch_pilgrimage
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[MOBILE_HEAL] + 1))
+                                  && number_in_range(pilgrimage - split_states[MOBILE_HEAL],1,3)
                                 {
                                     print_message("Split: Pilgrimage Pickup");
-                                    split_states[MOBILE_HEAL] =
-                                      watch_pilgrimage.pair.unwrap().current;
+                                    split_states[MOBILE_HEAL] = pilgrimage;
                                     split()
                                 }
                                 if settings.empathy
-                                  && watch_empathy
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[MAGIC_HASTE] + 1))
+                                  && number_in_range(empathy - split_states[MAGIC_HASTE],1,3)
                                 {
-                                    match watch_empathy.pair.unwrap().current {
+                                    match empathy {
                                         1 => print_message("Split: Empathy Pickup #1"),
                                         2 => print_message("Split: Empathy Pickup #2"),
                                         _ => print_message("Split: Empathy Pickup #Error [Out of Bounds]"),
                                     }
-                                    split_states[MAGIC_HASTE] =
-                                      watch_empathy.pair.unwrap().current;
+                                    split_states[MAGIC_HASTE] = empathy;
                                     split()
                                 }
                                 if settings.good_graces
-                                  && watch_good_graces
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[HEAL_BOOST] + 1))
+                                  && number_in_range(good_graces - split_states[HEAL_BOOST],1,3)
                                 {
-                                    match watch_good_graces.pair.unwrap().current {
+                                    match good_graces {
                                         1 => print_message("Split: Good Graces Pickup #1"),
                                         2 => print_message("Split: Good Graces Pickup #2"),
                                         _ => print_message("Split: Good Graces Pickup #Error [Out of Bounds]"),
                                     }
-                                    split_states[HEAL_BOOST] =
-                                      watch_good_graces.pair.unwrap().current;
+                                    split_states[HEAL_BOOST] = good_graces;
                                     split()
                                 }
                                 if settings.martial_prowess
-                                  && watch_martial_prowess
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[DAMAGE_BOOST] + 1))
+                                  && number_in_range(martial_prowess - split_states[DAMAGE_BOOST],1,3)
                                 {
                                     print_message("Split: Martial Prowess Pickup");
-                                    split_states[DAMAGE_BOOST] =
-                                      watch_martial_prowess.pair.unwrap().current;
+                                    split_states[DAMAGE_BOOST] = martial_prowess;
                                     split()
                                 }
                                 if settings.clear_mind
-                                  && watch_clear_mind
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[MAGIC_PIECE] + 1))
+                                  && number_in_range(clear_mind - split_states[MAGIC_PIECE],1,3)
                                 {
-                                    match watch_clear_mind.pair.unwrap().current {
+                                    match clear_mind {
                                         1 => print_message("Split: Clear Mind Pickup #1"),
                                         2 => print_message("Split: Clear Mind Pickup #2"),
                                         3 => print_message("Split: Clear Mind Pickup #3"),
                                         _ => print_message("Split: Clear Mind Pickup #Error [Out of Bounds]"),
                                     }
-                                    split_states[MAGIC_PIECE] =
-                                      watch_clear_mind.pair.unwrap().current;
+                                    split_states[MAGIC_PIECE] = clear_mind;
                                     split()
                                 }
                                 if settings.professionalism
-                                  && watch_outfit_professionalism
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_PRO] + 1))
+                                  && number_in_range(outfit_professionalism - split_states[OUTFIT_PRO],1,3)
                                 {
                                     print_message("Split: Outfit Professionalism Pickup");
-                                    split_states[OUTFIT_PRO] =
-                                      watch_outfit_professionalism.pair.unwrap().current;
+                                    split_states[OUTFIT_PRO] = outfit_professionalism;
                                     split()
                                 }
                                 if settings.guardian
-                                  && watch_outfit_guardian
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_SHOUJO] + 1))
+                                  && number_in_range(outfit_guardian - split_states[OUTFIT_SHOUJO],1,3)
                                 {
                                     print_message("Split: Outfit Guardian Pickup");
-                                    split_states[OUTFIT_SHOUJO] =
-                                      watch_outfit_guardian.pair.unwrap().current;
+                                    split_states[OUTFIT_SHOUJO] = outfit_guardian;
                                     split()
                                 }
                                 if settings.chivalry
-                                  && watch_outfit_chivalry
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_KNIGHT] + 1))
+                                  && number_in_range(outfit_chivalry - split_states[OUTFIT_KNIGHT],1,3)
                                 {
                                     print_message("Split: Outfit Chivalry Pickup");
-                                    split_states[OUTFIT_KNIGHT] =
-                                      watch_outfit_chivalry.pair.unwrap().current;
+                                    split_states[OUTFIT_KNIGHT] = outfit_chivalry;
                                     split()
                                 }
                                 if settings.bleeding_heart
-                                  && watch_outfit_bleeding_heart
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_PAST] + 1))
+                                  && number_in_range(outfit_bleeding_heart - split_states[OUTFIT_PAST],1,3)
                                 {
                                     print_message("Split: Outfit Bleeding Heart Pickup");
-                                    split_states[OUTFIT_PAST] =
-                                      watch_outfit_bleeding_heart.pair.unwrap().current;
+                                    split_states[OUTFIT_PAST] = outfit_bleeding_heart;
                                     split()
                                 }
                                 if settings.nostalgia
-                                  && watch_outfit_nostalgia
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_JAM] + 1))
+                                  && number_in_range(outfit_nostalgia - split_states[OUTFIT_JAM],1,3)
                                 {
                                     print_message("Split: Outfit Nostalgia Pickup");
-                                    split_states[OUTFIT_JAM] =
-                                      watch_outfit_nostalgia.pair.unwrap().current;
+                                    split_states[OUTFIT_JAM] = outfit_nostalgia;
                                     split()
                                 }
                                 if settings.devotion
-                                  && watch_outfit_devotion
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_FAITH] + 1))
+                                  && number_in_range(outfit_devotion - split_states[OUTFIT_FAITH],1,3)
                                 {
                                     print_message("Split: Outfit Devotion Pickup");
-                                    split_states[OUTFIT_FAITH] =
-                                      watch_outfit_devotion.pair.unwrap().current;
+                                    split_states[OUTFIT_FAITH] = outfit_devotion;
                                     split()
                                 }
                                 if settings.class
-                                  && watch_outfit_class
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_CLASSY] + 1))
+                                  && number_in_range(outfit_class - split_states[OUTFIT_CLASSY],1,3)
                                 {
                                     print_message("Split: Outfit Class Pickup");
-                                    split_states[OUTFIT_CLASSY] =
-                                      watch_outfit_class.pair.unwrap().current;
+                                    split_states[OUTFIT_CLASSY] = outfit_class;
                                     split()
                                 }
                                 if settings.sweater
-                                  && watch_outfit_sweater
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[OUTFIT_SWEATER] + 1))
+                                  && number_in_range(outfit_sweater - split_states[OUTFIT_SWEATER],1,3)
                                 {
                                     print_message("Split: Outfit Sweater Pickup");
-                                    split_states[OUTFIT_SWEATER] =
-                                      watch_outfit_sweater.pair.unwrap().current;
+                                    split_states[OUTFIT_SWEATER] = outfit_sweater;
                                     split()
                                 }
                                 if settings.health_upgrades
-                                  && watch_health_upgrade_count
-                                  .pair
-                                  .unwrap()
-                                  .changed_to(&(split_states[HEALTH_UPGRADES] + 1))
+                                  && number_in_range(health_upgrade_count - split_states[HEALTH_UPGRADES],1,3)
                                 {
-                                    match watch_health_upgrade_count.pair.unwrap().current {
+                                    match health_upgrade_count {
                                         1 => print_message("Split: Health Upgrade Pickup #1"),
                                         2 => print_message("Split: Health Upgrade Pickup #2"),
                                         3 => print_message("Split: Health Upgrade Pickup #3"),
@@ -1158,7 +1014,7 @@ async fn main() {
                                         _ => print_message("Split: Health Upgrade Pickup #Error [Out of Bounds]"),
                                     }
                                     split_states[HEALTH_UPGRADES] =
-                                      watch_health_upgrade_count.pair.unwrap().current;
+                                      health_upgrade_count;
                                     split()
                                 }
                                 if watch_area_name.pair.unwrap().changed() {
@@ -1493,6 +1349,10 @@ fn wstring_to_string<const N: usize>(input: ArrayWString<N>) -> ArrayString<N> {
         i = i + 1;
     }
     out
+}
+
+fn number_in_range(input: i32, min: i32, max: i32) -> bool {
+    min <= input && input <= max
 }
 
 const ATTACK: usize = 0;
