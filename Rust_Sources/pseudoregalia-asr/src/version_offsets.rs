@@ -9,7 +9,7 @@ pub fn get_offsets(version: &GameVersion) -> Offsets {
             silver_keys: [0, 0x1B8, 0x1D0],
             health_upgrade_count: [0, 0x1B8, 0x268],
             fguid: [0, 0x30, 0x210],
-            area_name: [0, 0x1B8, 0x2A8, 0x0],
+            area_name: [0, 0x18],
             big_key_theatre: [1, 1, 1],
             boss_phase: [1, 1, 1, 1, 1],
             final_boss_hp: [1, 1, 1, 1, 1, 1],
@@ -27,7 +27,7 @@ pub fn get_offsets(version: &GameVersion) -> Offsets {
             health_upgrade_count: [0, 0x1B8, 0x268],
             fguid: [0, 0x30, 0x210],
             final_boss_hp: [0, 0x30, 0xE8, 0x2A8, 0x638, 0xA8],
-            area_name: [0, 0x1B8, 0x2A8, 0x0],
+            area_name: [0, 0x18],
             current_outfit: [0, 0x1B8, 0x494],
         },
         GameVersion::FullGoldPatch => Offsets {
@@ -42,7 +42,7 @@ pub fn get_offsets(version: &GameVersion) -> Offsets {
             health_upgrade_count: [0, 0x1B8, 0x260],
             fguid: [0, 0x30, 0x210],
             final_boss_hp: [0, 0x30, 0xE8, 0x2A8, 0x638, 0xA8],
-            area_name: [0, 0x1B8, 0x2A0, 0x0],
+            area_name: [0, 0x18],
             current_outfit: [0, 0x1B8, 0x48C],
         },
         GameVersion::MapUpdate => Offsets {
@@ -57,7 +57,7 @@ pub fn get_offsets(version: &GameVersion) -> Offsets {
             health_upgrade_count: [0, 0x1B8, 0x260],
             fguid: [0, 0x30, 0x210],
             final_boss_hp: [0, 0x30, 0xE8, 0x2A8, 0x638, 0xA8],
-            area_name: [0, 0x1B8, 0x2A0, 0x0],
+            area_name: [0, 0x18],
             current_outfit: [0, 0x1B8, 0x4DC],
         },
     }
@@ -81,6 +81,6 @@ pub(crate) struct Offsets {
     pub health_upgrade_count: [u64; 3],
     pub fguid: [u64; 3],
     pub final_boss_hp: [u64; 6],
-    pub area_name: [u64; 4],
+    pub area_name: [u64; 2],
     pub current_outfit: [u64; 3],
 }

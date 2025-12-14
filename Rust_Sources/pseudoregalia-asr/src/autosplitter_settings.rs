@@ -30,6 +30,8 @@ pub struct Settings {
     pub split: bool,
     #[default = true]
     pub reset: bool,
+    #[default = false]
+    pub all_transitions: bool,
 
     #[heading_level = 1]
     golden_keys: Title,

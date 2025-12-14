@@ -9,7 +9,7 @@ use asr::{
     game_engine::unreal::{FNameKey, Module, Version},
     print_message,
     settings::Gui,
-    string::{ArrayString, ArrayWString},
+    string::ArrayString,
     timer::{
         reset, set_variable, set_variable_float, set_variable_int, split, start, state, TimerState,
     },
@@ -35,6 +35,7 @@ async fn main() {
     let area_theatre: ArrayString<20> = ArrayString::from(&"Zone_Theatre").unwrap();
     let area_tower: ArrayString<20> = ArrayString::from(&"Zone_Tower").unwrap();
     let area_princess: ArrayString<20> = ArrayString::from(&"Zone_PrincessChamber").unwrap();
+    let area_title: ArrayString<20> = ArrayString::from(&"TitleScreen").unwrap();
 
     print_message("Autosplitter initialized. Searching for process...");
 
@@ -88,7 +89,7 @@ async fn main() {
                 let offsets = get_offsets(&version);
 
                 let mut split_states: [i32; 32] = [0; 32];
-                let mut cache_upgrades_f_name: [FNameKey; 38] = [FNameKey::default(); 38];
+                let mut cache_f_names: [FNameKey; 48] = [FNameKey::default(); 48];
                 let mut just_started: bool = true;
 
                 let mut watch_bailey_key: Watcher<bool> = Watcher::new();
@@ -242,84 +243,84 @@ async fn main() {
                                     let f_name = f_name.validate_utf8().unwrap_or("");
                                     off[3] = off[3] + 8;
                                     match f_name {
-                                        "attack" => cache_upgrades_f_name[ATTACK] = f_name_key,
+                                        "attack" => cache_f_names[ATTACK] = f_name_key,
                                         "WallRide" | "wallRide" => {
-                                            cache_upgrades_f_name[WALL_RIDE] = f_name_key
+                                            cache_f_names[WALL_RIDE] = f_name_key
                                         }
                                         "airKick" => {
-                                            cache_upgrades_f_name[AIR_KICK] = f_name_key
+                                            cache_f_names[AIR_KICK] = f_name_key
                                         }
-                                        "Slide" | "slide" => cache_upgrades_f_name[SLIDE] = f_name_key,
-                                        "Light" => cache_upgrades_f_name[LIGHT] = f_name_key,
+                                        "Slide" | "slide" => cache_f_names[SLIDE] = f_name_key,
+                                        "Light" => cache_f_names[LIGHT] = f_name_key,
                                         "SlideJump" => {
-                                            cache_upgrades_f_name[SLIDE_JUMP] = f_name_key
+                                            cache_f_names[SLIDE_JUMP] = f_name_key
                                         }
-                                        "plunge" => cache_upgrades_f_name[PLUNGE] = f_name_key,
+                                        "plunge" => cache_f_names[PLUNGE] = f_name_key,
                                         "Projectile" | "projectile" => {
-                                            cache_upgrades_f_name[PROJECTILE] = f_name_key
+                                            cache_f_names[PROJECTILE] = f_name_key
                                         }
                                         "PowerBoost" | "powerBoost" => {
-                                            cache_upgrades_f_name[POWER_BOOST] = f_name_key
+                                            cache_f_names[POWER_BOOST] = f_name_key
                                         }
                                         "chargeAttack" => {
-                                            cache_upgrades_f_name[CHARGE_ATTACK] = f_name_key
+                                            cache_f_names[CHARGE_ATTACK] = f_name_key
                                         }
                                         "extraKick" => {
-                                            cache_upgrades_f_name[EXTRA_KICK] = f_name_key
+                                            cache_f_names[EXTRA_KICK] = f_name_key
                                         }
-                                        "Map" => cache_upgrades_f_name[MAP] = f_name_key,
+                                        "Map" => cache_f_names[MAP] = f_name_key,
                                         "airRecovery" => {
-                                            cache_upgrades_f_name[AIR_RECOVERY] = f_name_key
+                                            cache_f_names[AIR_RECOVERY] = f_name_key
                                         }
                                         "mobileHeal" => {
-                                            cache_upgrades_f_name[MOBILE_HEAL] = f_name_key
+                                            cache_f_names[MOBILE_HEAL] = f_name_key
                                         }
                                         "magicHaste" => {
-                                            cache_upgrades_f_name[MAGIC_HASTE] = f_name_key
+                                            cache_f_names[MAGIC_HASTE] = f_name_key
                                         }
                                         "HealBoost" => {
-                                            cache_upgrades_f_name[HEAL_BOOST] = f_name_key
+                                            cache_f_names[HEAL_BOOST] = f_name_key
                                         }
                                         "damageBoost" => {
-                                            cache_upgrades_f_name[DAMAGE_BOOST] = f_name_key
+                                            cache_f_names[DAMAGE_BOOST] = f_name_key
                                         }
                                         "magicPiece" => {
-                                            cache_upgrades_f_name[MAGIC_PIECE] = f_name_key
+                                            cache_f_names[MAGIC_PIECE] = f_name_key
                                         }
                                         "outfitPro" => {
-                                            cache_upgrades_f_name[OUTFIT_PRO] = f_name_key
+                                            cache_f_names[OUTFIT_PRO] = f_name_key
                                         }
                                         "outfitShoujo" => {
-                                            cache_upgrades_f_name[OUTFIT_SHOUJO] = f_name_key
+                                            cache_f_names[OUTFIT_SHOUJO] = f_name_key
                                         }
                                         "outfitKnight" => {
-                                            cache_upgrades_f_name[OUTFIT_KNIGHT] = f_name_key
+                                            cache_f_names[OUTFIT_KNIGHT] = f_name_key
                                         }
                                         "outfitPast" => {
-                                            cache_upgrades_f_name[OUTFIT_PAST] = f_name_key
+                                            cache_f_names[OUTFIT_PAST] = f_name_key
                                         }
                                         "outfitJam" => {
-                                            cache_upgrades_f_name[OUTFIT_JAM] = f_name_key
+                                            cache_f_names[OUTFIT_JAM] = f_name_key
                                         }
                                         "outfitFaith" => {
-                                            cache_upgrades_f_name[OUTFIT_FAITH] = f_name_key
+                                            cache_f_names[OUTFIT_FAITH] = f_name_key
                                         }
                                         "outfitClassy" => {
-                                            cache_upgrades_f_name[OUTFIT_CLASSY] = f_name_key
+                                            cache_f_names[OUTFIT_CLASSY] = f_name_key
                                         }
                                         "outfitSweater" => {
-                                            cache_upgrades_f_name[OUTFIT_SWEATER] = f_name_key
+                                            cache_f_names[OUTFIT_SWEATER] = f_name_key
                                         }
                                         _ => {}
                                     }
                                 }
-                                if f_name_key != FNameKey::default() && cache_upgrades_f_name.contains(&f_name_key) {
+                                if f_name_key != FNameKey::default() && cache_f_names.contains(&f_name_key) {
                                     if let Ok(flag) = process.read_pointer_path::<i32>(
                                         module.g_world(),
                                         Bit64,
                                         &off,
                                     ) {
-                                        match cache_upgrades_f_name
+                                        match cache_f_names
                                           .iter()
                                           .position(|&r| r == f_name_key)
                                           .unwrap()
@@ -484,14 +485,51 @@ async fn main() {
                         watch_final_boss_hp.update_infallible(flag);
                         set_variable_float("Boss HP", flag);
                     }
-                    if let Ok(flag) = process.read_pointer_path::<ArrayWString<20>>(
-                        module.g_world(),
-                        Bit64,
-                        &offsets.area_name,
+                    if let Ok(f_name_key) = process.read_pointer_path::<FNameKey>(
+                       module.g_world(),
+                       Bit64,
+                       &offsets.area_name,
                     ) {
-                        let s = wstring_to_string(flag);
-                        watch_area_name.update_infallible(s);
-                        set_variable("Area Name", s.as_str());
+                        if let Ok(f_name) = module.get_fname::<20>(&process, f_name_key) {
+                            let f_name = f_name.validate_utf8().unwrap_or_default();
+                            match f_name {
+                                "ZONE_Dungeon" => {cache_f_names[AREA_DUNGEON] = f_name_key}
+                                "ZONE_LowerCastle" => {cache_f_names[AREA_CASTLE] = f_name_key}
+                                "Zone_Library" => {cache_f_names[AREA_LIBRARY] = f_name_key}
+                                "ZONE_Exterior" => {cache_f_names[AREA_EXTERIOR] = f_name_key}
+                                "Zone_Upper" => {cache_f_names[AREA_UPPER] = f_name_key}
+                                "Zone_Caves" => {cache_f_names[AREA_CAVES] = f_name_key}
+                                "Zone_Theatre" => {cache_f_names[AREA_THEATRE] = f_name_key}
+                                "Zone_Tower" => {cache_f_names[AREA_TOWER] = f_name_key}
+                                "Zone_PrincessChamber" => {cache_f_names[AREA_CHAMBER] = f_name_key}
+                                "TitleScreen" => {cache_f_names[AREA_TITLE] = f_name_key}
+                                _ => {}
+                            }
+                        }
+                        let area_name: ArrayString<20>;
+                        match cache_f_names
+                          .iter()
+                          .position(|&r| r == f_name_key)
+                          .unwrap_or(4294967295)
+                        {
+                            AREA_DUNGEON => {area_name=area_dungeon}
+                            AREA_CASTLE => {area_name=area_castle}
+                            AREA_LIBRARY => {area_name=area_library}
+                            AREA_EXTERIOR => {area_name=area_bailey}
+                            AREA_UPPER => {area_name=area_keep}
+                            AREA_CAVES => {area_name=area_underbelly}
+                            AREA_THEATRE => {area_name=area_theatre}
+                            AREA_TOWER => {area_name=area_tower}
+                            AREA_CHAMBER => {area_name=area_princess}
+                            AREA_TITLE => {area_name=area_title}
+                            _=> {area_name=ArrayString::default()}
+                        }
+                        if area_name == ArrayString::default() { return }
+                        watch_area_name.update_infallible(area_name);
+                        if watch_area_name.pair.unwrap().changed() {
+                            set_variable("Old Area Name", watch_area_name.pair.unwrap().old.as_str());
+                            set_variable("Area Name", area_name.as_str());
+                        }
                     }
                     if let Ok(f_name_key) = process.read_pointer_path::<FNameKey>(
                         module.g_world(),
@@ -502,46 +540,46 @@ async fn main() {
                             let f_name = f_name.validate_utf8().unwrap_or_default();
                             match f_name {
                                 "Base" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_DEFAULT] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_DEFAULT] = f_name_key
                                 }
                                 "glove" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_CLING] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_CLING] = f_name_key
                                 }
                                 "greaves" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_GREAVES] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_GREAVES] = f_name_key
                                 }
                                 "nun" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_DEVOTION] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_DEVOTION] = f_name_key
                                 }
                                 "pro" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_PROFESSIONAL] =
+                                    cache_f_names[EQUIP_OUTFIT_PROFESSIONAL] =
                                       f_name_key
                                 }
                                 "shoujo" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_GUARDIAN] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_GUARDIAN] = f_name_key
                                 }
                                 "knight" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_CHIVALRY] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_CHIVALRY] = f_name_key
                                 }
                                 "past" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_BLEEDING_HEART] =
+                                    cache_f_names[EQUIP_OUTFIT_BLEEDING_HEART] =
                                       f_name_key
                                 }
                                 "jam" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_NOSTALGIA] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_NOSTALGIA] = f_name_key
                                 }
                                 "Class" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_CLASS] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_CLASS] = f_name_key
                                 }
                                 "sweater" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_SWEATER] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_SWEATER] = f_name_key
                                 }
                                 "pants" => {
-                                    cache_upgrades_f_name[EQUIP_OUTFIT_PANTS] = f_name_key
+                                    cache_f_names[EQUIP_OUTFIT_PANTS] = f_name_key
                                 }
                                 _ => {}
                             }
-                            match cache_upgrades_f_name
+                            match cache_f_names
                               .iter()
                               .position(|&r| r == f_name_key)
                               .unwrap_or(4294967295)
@@ -677,7 +715,6 @@ async fn main() {
                     match state() {
                         TimerState::NotRunning => {
                             total_silver_keys = 0;
-                            watch_area_name.update_infallible(ArrayString::new());
                             if settings.start
                               && watch_fguid.pair.unwrap().changed_from(&5185712904977434514)
                             {
@@ -1018,247 +1055,254 @@ async fn main() {
                                     split()
                                 }
                                 if watch_area_name.pair.unwrap().changed() {
-                                    if settings.area_dungeon_castle
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_dungeon, &area_castle)
-                                    {
-                                        print_message("Split: Area Dungeon > Castle");
+                                    if settings.all_transitions && watch_area_name.pair.unwrap().old != area_title && watch_area_name.pair.unwrap().current != area_title {
+                                        print_message("Split: All Transitions:");
+                                        print_message(watch_area_name.pair.unwrap().old.as_str());
+                                        print_message(watch_area_name.pair.unwrap().current.as_str());
                                         split()
-                                    }
-                                    if settings.area_dungeon_underbelly
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_dungeon, &area_underbelly)
-                                    {
-                                        print_message("Split: Area Dungeon > Underbelly");
-                                        split()
-                                    }
-                                    if settings.area_dungeon_theatre
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_dungeon, &area_theatre)
-                                    {
-                                        print_message("Split: Area Dungeon > Theatre");
-                                        split()
-                                    }
+                                    } else {
+                                        if settings.area_dungeon_castle
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_dungeon, &area_castle)
+                                        {
+                                            print_message("Split: Area Dungeon > Castle");
+                                            split()
+                                        }
+                                        if settings.area_dungeon_underbelly
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_dungeon, &area_underbelly)
+                                        {
+                                            print_message("Split: Area Dungeon > Underbelly");
+                                            split()
+                                        }
+                                        if settings.area_dungeon_theatre
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_dungeon, &area_theatre)
+                                        {
+                                            print_message("Split: Area Dungeon > Theatre");
+                                            split()
+                                        }
 
-                                    if settings.area_castle_dungeon
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_castle, &area_dungeon)
-                                    {
-                                        print_message("Split: Area Castle > Dungeon");
-                                        split()
-                                    }
-                                    if settings.area_castle_bailey
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_castle, &area_bailey)
-                                    {
-                                        print_message("Split: Area Castle > Bailey");
-                                        split()
-                                    }
-                                    if settings.area_castle_keep
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_castle, &area_keep)
-                                    {
-                                        print_message("Split: Area Castle > Keep");
-                                        split()
-                                    }
-                                    if settings.area_castle_library
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_castle, &area_library)
-                                    {
-                                        print_message("Split: Area Castle > Library");
-                                        split()
-                                    }
-                                    if settings.area_castle_theatre
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_castle, &area_theatre)
-                                    {
-                                        print_message("Split: Area Castle > Theatre");
-                                        split()
-                                    }
+                                        if settings.area_castle_dungeon
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_castle, &area_dungeon)
+                                        {
+                                            print_message("Split: Area Castle > Dungeon");
+                                            split()
+                                        }
+                                        if settings.area_castle_bailey
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_castle, &area_bailey)
+                                        {
+                                            print_message("Split: Area Castle > Bailey");
+                                            split()
+                                        }
+                                        if settings.area_castle_keep
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_castle, &area_keep)
+                                        {
+                                            print_message("Split: Area Castle > Keep");
+                                            split()
+                                        }
+                                        if settings.area_castle_library
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_castle, &area_library)
+                                        {
+                                            print_message("Split: Area Castle > Library");
+                                            split()
+                                        }
+                                        if settings.area_castle_theatre
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_castle, &area_theatre)
+                                        {
+                                            print_message("Split: Area Castle > Theatre");
+                                            split()
+                                        }
 
-                                    if settings.area_library_castle
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_library, &area_castle)
-                                    {
-                                        print_message("Split: Area Library > Castle");
-                                        split()
-                                    }
+                                        if settings.area_library_castle
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_library, &area_castle)
+                                        {
+                                            print_message("Split: Area Library > Castle");
+                                            split()
+                                        }
 
-                                    if settings.area_bailey_castle
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_bailey, &area_castle)
-                                    {
-                                        print_message("Split: Area Bailey > Castle");
-                                        split()
-                                    }
-                                    if settings.area_bailey_underbelly
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_bailey, &area_underbelly)
-                                    {
-                                        print_message("Split: Area Bailey > Underbelly");
-                                        split()
-                                    }
-                                    if settings.area_bailey_tower
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_bailey, &area_tower)
-                                    {
-                                        print_message("Split: Area Bailey > Tower");
-                                        split()
-                                    }
-                                    if settings.area_bailey_theatre
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_bailey, &area_theatre)
-                                    {
-                                        print_message("Split: Area Bailey > Theatre");
-                                        split()
-                                    }
+                                        if settings.area_bailey_castle
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_bailey, &area_castle)
+                                        {
+                                            print_message("Split: Area Bailey > Castle");
+                                            split()
+                                        }
+                                        if settings.area_bailey_underbelly
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_bailey, &area_underbelly)
+                                        {
+                                            print_message("Split: Area Bailey > Underbelly");
+                                            split()
+                                        }
+                                        if settings.area_bailey_tower
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_bailey, &area_tower)
+                                        {
+                                            print_message("Split: Area Bailey > Tower");
+                                            split()
+                                        }
+                                        if settings.area_bailey_theatre
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_bailey, &area_theatre)
+                                        {
+                                            print_message("Split: Area Bailey > Theatre");
+                                            split()
+                                        }
 
-                                    if settings.area_keep_castle
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_keep, &area_castle)
-                                    {
-                                        print_message("Split: Area Keep > Castle");
-                                        split()
-                                    }
-                                    if settings.area_keep_underbelly
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_keep, &area_underbelly)
-                                    {
-                                        print_message("Split: Area Keep > Underbelly");
-                                        split()
-                                    }
-                                    if settings.area_keep_theatre
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_keep, &area_theatre)
-                                    {
-                                        print_message("Split: Area Keep > Theatre");
-                                        split()
-                                    }
+                                        if settings.area_keep_castle
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_keep, &area_castle)
+                                        {
+                                            print_message("Split: Area Keep > Castle");
+                                            split()
+                                        }
+                                        if settings.area_keep_underbelly
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_keep, &area_underbelly)
+                                        {
+                                            print_message("Split: Area Keep > Underbelly");
+                                            split()
+                                        }
+                                        if settings.area_keep_theatre
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_keep, &area_theatre)
+                                        {
+                                            print_message("Split: Area Keep > Theatre");
+                                            split()
+                                        }
 
-                                    if settings.area_underbelly_dungeon
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_underbelly, &area_dungeon)
-                                    {
-                                        print_message("Split: Area Underbelly > Dungeon");
-                                        split()
-                                    }
-                                    if settings.area_underbelly_bailey
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_underbelly, &area_bailey)
-                                    {
-                                        print_message("Split: Area Underbelly > Bailey");
-                                        split()
-                                    }
-                                    if settings.area_underbelly_keep
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_underbelly, &area_keep)
-                                    {
-                                        print_message("Split: Area Underbelly > Keep");
-                                        split()
-                                    }
+                                        if settings.area_underbelly_dungeon
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_underbelly, &area_dungeon)
+                                        {
+                                            print_message("Split: Area Underbelly > Dungeon");
+                                            split()
+                                        }
+                                        if settings.area_underbelly_bailey
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_underbelly, &area_bailey)
+                                        {
+                                            print_message("Split: Area Underbelly > Bailey");
+                                            split()
+                                        }
+                                        if settings.area_underbelly_keep
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_underbelly, &area_keep)
+                                        {
+                                            print_message("Split: Area Underbelly > Keep");
+                                            split()
+                                        }
 
-                                    if settings.area_theatre_dungeon
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_theatre, &area_dungeon)
-                                    {
-                                        print_message("Split: Area Theatre > Dungeon");
-                                        split()
-                                    }
-                                    if settings.area_theatre_castle
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_theatre, &area_castle)
-                                    {
-                                        print_message("Split: Area Theatre > Castle");
-                                        split()
-                                    }
-                                    if settings.area_theatre_bailey
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_theatre, &area_bailey)
-                                    {
-                                        print_message("Split: Area Theatre > Bailey");
-                                        split()
-                                    }
-                                    if settings.area_theatre_keep
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_theatre, &area_keep)
-                                    {
-                                        print_message("Split: Area Theatre > Keep");
-                                        split()
-                                    }
+                                        if settings.area_theatre_dungeon
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_theatre, &area_dungeon)
+                                        {
+                                            print_message("Split: Area Theatre > Dungeon");
+                                            split()
+                                        }
+                                        if settings.area_theatre_castle
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_theatre, &area_castle)
+                                        {
+                                            print_message("Split: Area Theatre > Castle");
+                                            split()
+                                        }
+                                        if settings.area_theatre_bailey
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_theatre, &area_bailey)
+                                        {
+                                            print_message("Split: Area Theatre > Bailey");
+                                            split()
+                                        }
+                                        if settings.area_theatre_keep
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_theatre, &area_keep)
+                                        {
+                                            print_message("Split: Area Theatre > Keep");
+                                            split()
+                                        }
 
-                                    if settings.area_tower_bailey
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_tower, &area_bailey)
-                                    {
-                                        print_message("Split: Area Tower > Bailey");
-                                        split()
-                                    }
-                                    if settings.area_tower_boss
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_tower, &area_princess)
-                                    {
-                                        print_message("Split: Area Tower > Princess");
-                                        split()
-                                    }
+                                        if settings.area_tower_bailey
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_tower, &area_bailey)
+                                        {
+                                            print_message("Split: Area Tower > Bailey");
+                                            split()
+                                        }
+                                        if settings.area_tower_boss
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_tower, &area_princess)
+                                        {
+                                            print_message("Split: Area Tower > Princess");
+                                            split()
+                                        }
 
-                                    if settings.area_boss_tower
-                                      && watch_area_name
-                                      .pair
-                                      .unwrap()
-                                      .changed_from_to(&area_princess, &area_tower)
-                                    {
-                                        print_message("Split: Area Princess > Tower");
-                                        split()
+                                        if settings.area_boss_tower
+                                          && watch_area_name
+                                          .pair
+                                          .unwrap()
+                                          .changed_from_to(&area_princess, &area_tower)
+                                        {
+                                            print_message("Split: Area Princess > Tower");
+                                            split()
+                                        }
                                     }
                                 }
                                 if watch_area_name.pair.unwrap().current == area_princess
@@ -1274,6 +1318,7 @@ async fn main() {
                                     print_message("Split: Game Jam Final Door (Repeat)");
                                     split()
                                 }
+
                                 if watch_current_outfit.pair.unwrap().changed() {
                                     match watch_current_outfit.pair.clone().unwrap().current.as_str() {
                                         "Base" => if settings.equip_default {
@@ -1339,17 +1384,6 @@ async fn main() {
         print_message("Disconnected... Searching for new process...")
     }
 }
-fn wstring_to_string<const N: usize>(input: ArrayWString<N>) -> ArrayString<N> {
-    let mut i = 0;
-    let mut out: ArrayString<N> = ArrayString::new();
-    while i < input.len() {
-        if let Ok(next) = core::str::from_utf8(&[(input[i] & 0xFF) as u8]) {
-            out.push_str(next);
-        }
-        i = i + 1;
-    }
-    out
-}
 
 fn number_in_range(input: i32, min: i32, max: i32) -> bool {
     min <= input && input <= max
@@ -1399,3 +1433,13 @@ const EQUIP_OUTFIT_BLEEDING_HEART: usize = 34; // "past"
 const EQUIP_OUTFIT_NOSTALGIA: usize = 35; // "jam"
 const EQUIP_OUTFIT_CLASS: usize = 36; // "Class"
 const EQUIP_OUTFIT_SWEATER: usize = 37; // "sweater"
+const AREA_DUNGEON: usize = 38;
+const AREA_CASTLE: usize = 39;
+const AREA_LIBRARY: usize = 40;
+const AREA_EXTERIOR: usize = 41;
+const AREA_UPPER: usize = 42;
+const AREA_CAVES: usize = 43;
+const AREA_THEATRE: usize = 44;
+const AREA_TOWER: usize = 45;
+const AREA_CHAMBER: usize = 46;
+const AREA_TITLE: usize = 47;
