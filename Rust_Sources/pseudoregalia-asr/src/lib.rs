@@ -89,6 +89,7 @@ async fn main() {
                 let offsets = get_offsets(&version);
 
                 let mut split_states: [i32; 32] = [0; 32];
+                let mut goatlings_talked: [bool;19] = [false;19];
                 let mut cache_f_names: [FNameKey; 48] = [FNameKey::default(); 48];
                 let mut just_started: bool = true;
 
@@ -132,6 +133,7 @@ async fn main() {
                 let mut watch_area_name: Watcher<ArrayString<20>> = Watcher::new();
                 let mut watch_current_outfit: Watcher<ArrayString<7>> = Watcher::new();
                 let mut watch_jam_final: Watcher<bool> = Watcher::new();
+                let mut goatlings_currently_talking: [Watcher<bool>;19] = [Watcher::new();19];
 
                 watch_bailey_key.update_infallible(false);
                 watch_underbelly_key.update_infallible(false);
@@ -144,10 +146,14 @@ async fn main() {
                 watch_area_name.update_infallible(ArrayString::new());
                 watch_current_outfit.update_infallible(ArrayString::from(&"Base").unwrap());
                 watch_jam_final.update_infallible(false);
-
+                for goatling in goatlings_currently_talking.iter_mut() {
+                    goatling.update_infallible(false);
+                    goatling.update_infallible(false);
+                }
 
                 print_message("Start Loop");
                 loop {
+                    set_variable_int("World", module.g_world().value());
                     settings.update();
                     if version == GameVersion::GameJam {
                         if let Ok(flag) = process.read_pointer_path::<u8>(
@@ -512,13 +518,28 @@ async fn main() {
                           .position(|&r| r == f_name_key)
                           .unwrap_or(4294967295)
                         {
-                            AREA_DUNGEON => {area_name=area_dungeon}
-                            AREA_CASTLE => {area_name=area_castle}
+                            AREA_DUNGEON => {
+                                area_name=area_dungeon;
+                                update_goatlings(&process,&module,&offsets.goatlings_dungeon,& mut goatlings_currently_talking, 0);
+                            }
+                            AREA_CASTLE => {
+                                area_name=area_castle;
+                                update_goatlings(&process,&module,&offsets.goatlings_castle,& mut goatlings_currently_talking, 5);
+                            }
                             AREA_LIBRARY => {area_name=area_library}
-                            AREA_EXTERIOR => {area_name=area_bailey}
-                            AREA_UPPER => {area_name=area_keep}
+                            AREA_EXTERIOR => {
+                                area_name=area_bailey;
+                                update_goatlings(&process,&module,&offsets.goatlings_bailey,& mut goatlings_currently_talking, 18);
+                            }
+                            AREA_UPPER => {
+                                area_name=area_keep;
+                                update_goatlings(&process,&module,&offsets.goatlings_keep,& mut goatlings_currently_talking, 11);
+                            }
                             AREA_CAVES => {area_name=area_underbelly}
-                            AREA_THEATRE => {area_name=area_theatre}
+                            AREA_THEATRE => {
+                                area_name=area_theatre;
+                                update_goatlings(&process,&module,&offsets.goatlings_theatre,& mut goatlings_currently_talking, 13);
+                            }
                             AREA_TOWER => {area_name=area_tower}
                             AREA_CHAMBER => {area_name=area_princess}
                             AREA_TITLE => {area_name=area_title}
@@ -711,6 +732,7 @@ async fn main() {
                         } else {
                             split_states[THEATRE_KEY] = 0
                         }
+                        goatlings_talked = [false;19];
                     }
                     match state() {
                         TimerState::NotRunning => {
@@ -1372,6 +1394,135 @@ async fn main() {
                                         _ => {}
                                     }
                                 }
+                                set_variable_int("Goatling", -1);
+                                for (index, goatling) in goatlings_currently_talking.iter().enumerate() {
+                                    if goatling.pair.unwrap().current == true {set_variable_int("Goatling", index as u64)}
+                                    if goatling.pair.unwrap().changed_to(&false) && !goatlings_talked[index] {
+                                        goatlings_talked[index] = true;
+                                        if settings.all_goatlings {
+                                            print_message("Split: All Goatlings");
+                                            split();
+                                        }
+                                        else {
+                                            match index{
+                                                0 => {
+                                                    if settings.repentant_goatling {
+                                                        print_message("Split: Repentant Goatling (Dilapidated Dungeon)");
+                                                        split()
+                                                    }
+                                                }
+                                                1 => {
+                                                    if settings.defeatist_goatling {
+                                                        print_message("Split: Defeatist Goatling (Dilapidated Dungeon)");
+                                                        split()
+                                                    }
+                                                }
+                                                2 => {
+                                                    if settings.rambling_goatling {
+                                                        print_message("Split: Rambling Goatling (Dilapidated Dungeon)");
+                                                        split()
+                                                    }
+                                                }
+                                                3 => {
+                                                    if settings.unwelcoming_goatling {
+                                                        print_message("Split: Unwelcoming Goatling (Dilapidated Dungeon)");
+                                                        split()
+                                                    }
+                                                }
+                                                4 => {
+                                                    if settings.mirror_room_goatling {
+                                                        print_message("Split: Mirror Room Goatling (Dilapidated Dungeon)");
+                                                        split()
+                                                    }
+                                                }
+                                                5 => {
+                                                    if settings.bubblephobic_goatling {
+                                                        print_message("Split: Bubblephobic Goatling (Castle Sansa)");
+                                                        split()
+                                                    }
+                                                }
+                                                6 => {
+                                                    if settings.crystal_licker_goatling {
+                                                        print_message("Split: Crystal Licker Goatling (Castle Sansa)");
+                                                        split()
+                                                    }
+                                                }
+                                                7 => {
+                                                    if settings.gazebo_goatling {
+                                                        print_message("Split: Gazebo Goatling (Castle Sansa)");
+                                                        split()
+                                                    }
+                                                }
+                                                8 => {
+                                                    if settings.trapped_goatling {
+                                                        print_message("Split: Trapped Goatling (Castle Sansa)");
+                                                        split()
+                                                    }
+                                                }
+                                                9 => {
+                                                    if settings.memento_goatling {
+                                                        print_message("Split: Memento Goatling (Castle Sansa)");
+                                                        split()
+                                                    }
+                                                }
+                                                10 => {
+                                                    if settings.goatling_near_library {
+                                                        print_message("Split: Goatling near Library (Castle Sansa)");                                                   split()
+                                                    }
+                                                }
+                                                11 => {
+                                                    if settings.furnitureless_goatling {
+                                                        print_message("Split: Furniture-less Goatling (Sansa Keep)");
+                                                        split()
+                                                    }
+                                                }
+                                                12 => {
+                                                    if settings.distorted_goatling {
+                                                        print_message("Split: Distorted Goatling (Sansa Keep)");
+                                                        split()
+                                                    }
+                                                }
+                                                13 => {
+                                                    if settings.murderous_goatling {
+                                                        print_message("Split: Murderous Goatling (Twilight Theatre)");
+                                                        split()
+                                                    }
+                                                }
+                                                14 => {
+                                                    if settings.bean_casserole_goatling {
+                                                        print_message("Split: Bean Casserole Goatling (Twilight Theatre)");
+                                                        split()
+                                                    }
+                                                }
+                                                15 => {
+                                                    if settings.theatre_goer_goatling_1 {
+                                                        print_message("Split: Theatre Goer Goatling 1 (Twilight Theatre)");
+                                                        split()
+                                                    }
+                                                }
+                                                16 => {
+                                                    if settings.theatre_goer_goatling_2 {
+                                                        print_message("Split: Theatre Goer Goatling 2 (Twilight Theatre)");
+                                                        split()
+                                                    }
+                                                }
+                                                17 => {
+                                                    if settings.theatre_manager_goatling {
+                                                        print_message("Split: Theatre Manager Goatling (Twilight Theatre)");
+                                                        split()
+                                                    }
+                                                }
+                                                18 => {
+                                                    if settings.alley_goatling {
+                                                        print_message("Split: Alley Goatling (Empty Bailey)");
+                                                        split()
+                                                    }
+                                                }
+                                                _ => {}
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         _ => {}
@@ -1388,7 +1539,21 @@ async fn main() {
 fn number_in_range(input: i32, min: i32, max: i32) -> bool {
     min <= input && input <= max
 }
-
+fn update_goatlings(
+    process: &Process,
+    module: &Module,
+    offsets: &[[u64; 5]],
+    goatlings: &mut [Watcher<bool>],
+    start_index: usize,
+) {
+    let mut index: usize = start_index;
+    for offset in offsets {
+        if let Ok(flag) = process.read_pointer_path::<u64>(module.g_world(), Bit64, offset) {
+            goatlings[index].update_infallible(flag != 0);
+            index = index + 1;
+        }
+    }
+}
 const ATTACK: usize = 0;
 const WALL_RIDE: usize = 1;
 const AIR_KICK: usize = 2;

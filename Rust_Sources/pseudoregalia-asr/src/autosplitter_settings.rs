@@ -32,6 +32,8 @@ pub struct Settings {
     pub reset: bool,
     #[default = false]
     pub all_transitions: bool,
+    #[default = false]
+    pub all_goatlings: bool,
 
     #[heading_level = 1]
     golden_keys: Title,
@@ -144,6 +146,58 @@ pub struct Settings {
     pub equip_class: bool,
     /// Sweater (Sleepytime)
     pub equip_sweater: bool,
+
+    #[heading_level = 1]
+    goatlings: Title,
+    /// All Goatlings
+    #[heading_level = 2]
+    in_dilapidated_dungeon: Title,
+    #[default = false]
+    pub mirror_room_goatling: bool,
+    #[default = false]
+    pub rambling_goatling: bool,
+    #[default = false]
+    pub unwelcoming_goatling: bool,
+    #[default = false]
+    pub repentant_goatling: bool,
+    #[default = false]
+    pub defeatist_goatling: bool,
+    #[heading_level = 2]
+    in_castle_sansa: Title,
+    #[default = false]
+    pub crystal_licker_goatling: bool,
+    #[default = false]
+    pub gazebo_goatling: bool,
+    #[default = false]
+    pub bubblephobic_goatling: bool,
+    #[default = false]
+    pub trapped_goatling: bool,
+    #[default = false]
+    pub memento_goatling: bool,
+    #[default = false]
+    pub goatling_near_library: bool,
+    #[heading_level = 2]
+    in_sansa_keep: Title,
+    #[default = false]
+    pub furnitureless_goatling: bool,
+    #[default = false]
+    pub distorted_goatling: bool,
+    #[heading_level = 2]
+    in_twilight_theatre: Title,
+    #[default = false]
+    pub bean_casserole_goatling: bool,
+    #[default = false]
+    pub theatre_goer_goatling_1: bool,
+    #[default = false]
+    pub theatre_goer_goatling_2: bool,
+    #[default = false]
+    pub theatre_manager_goatling: bool,
+    #[default = false]
+    pub murderous_goatling: bool,
+    #[heading_level = 2]
+    in_empty_bailey: Title,
+    #[default = false]
+    pub alley_goatling: bool,
 
     #[heading_level = 1]
     area_splits: Title,
