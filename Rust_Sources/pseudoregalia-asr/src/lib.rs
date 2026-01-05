@@ -60,7 +60,7 @@ async fn main() {
                 Process::attach(name)
             })
         })
-          .await;
+        .await;
         process.until_closes(async {
             print_message("Process Found: ");
             print_message(process_name);
@@ -68,19 +68,19 @@ async fn main() {
             {
                 let size = retry(|| process.get_module_size(process_name)).await;
                 match size {
-                    2125824 => {
+                    2125824 | 246771712 => {
                         version = Some(GameVersion::EarlyFGP);
                         set_variable("Game Version", "Early FGP")
                     }
-                    24850432 => {
+                    24850432 | 111476736 => {
                         version = Some(GameVersion::FullGoldPatch);
                         set_variable("Game Version", "Full Gold Patch")
                     }
-                    1462272 => {
+                    1462272 | 111513600 => {
                         version = Some(GameVersion::MapUpdate);
                         set_variable("Game Version", "Map Update")
                     }
-                    32768 => {
+                    32768 | 246767616 => {
                         version = Some(GameVersion::GameJam);
                         set_variable("Game Version", "Game Jam / Post Jam Update")
                     }
@@ -180,6 +180,8 @@ async fn main() {
                             if jam_final.current
                             {
                                 set_variable("Game Jam Final", "True")
+                            } else {
+                                set_variable("Game Jam Final", "False")
                             }
                         } else {
                             set_variable("Game Jam Final", "False")
@@ -357,7 +359,7 @@ async fn main() {
                                                       = flag;
                                                     set_variable_int("outfitPast", flag);
                                                 }
-                                                "outfitJam" =>{
+                                                "outfitJam" => {
                                                     outfit_nostalgia = flag;
                                                     set_variable_int("outfitJam", flag);
                                                 }
@@ -365,11 +367,11 @@ async fn main() {
                                                     outfit_devotion = flag;
                                                     set_variable_int("outfitFaith", flag);
                                                 }
-                                                "outfitClassy" =>{
+                                                "outfitClassy" => {
                                                     outfit_class = flag;
                                                     set_variable_int("outfitClassy", flag);
                                                 }
-                                                "outfitSweater" =>{
+                                                "outfitSweater" => {
                                                     outfit_sweater = flag;
                                                     set_variable_int("outfitSweater", flag);
                                                 }
@@ -445,7 +447,7 @@ async fn main() {
                                         area_name = area_castle;
                                         update_goatlings(&process, &module, &offsets.goatlings_castle, &mut goatlings_currently_talking, 5);
                                     }
-                                    "Zone_Library" =>  { area_name = area_library }
+                                    "Zone_Library" => { area_name = area_library }
                                     "ZONE_Exterior" => {
                                         area_name = area_bailey;
                                         update_goatlings(&process, &module, &offsets.goatlings_bailey, &mut goatlings_currently_talking, 18);
@@ -454,24 +456,24 @@ async fn main() {
                                         area_name = area_keep;
                                         update_goatlings(&process, &module, &offsets.goatlings_keep, &mut goatlings_currently_talking, 11);
                                     }
-                                    "Zone_Caves" =>  { area_name = area_underbelly }
+                                    "Zone_Caves" => { area_name = area_underbelly }
                                     "Zone_Theatre" => {
                                         area_name = area_theatre;
                                         update_goatlings(&process, &module, &offsets.goatlings_theatre, &mut goatlings_currently_talking, 13);
                                     }
-                                    "Zone_Tower" =>{ area_name = area_tower }
+                                    "Zone_Tower" => { area_name = area_tower }
                                     "Zone_PrincessChamber" => { area_name = area_princess }
                                     "TitleScreen" => { area_name = area_title }
                                     _ => { area_name = ArrayString::default() }
                                 }
                                 if area_name != ArrayString::default() {
-                                watch_area_name.update_infallible(area_name);
-                                if let Some(watch_area_name) = watch_area_name.pair {
-                                    if watch_area_name.changed() {
-                                        set_variable("Old Area Name", watch_area_name.old.as_str());
-                                        set_variable("Area Name", area_name.as_str());
+                                    watch_area_name.update_infallible(area_name);
+                                    if let Some(watch_area_name) = watch_area_name.pair {
+                                        if watch_area_name.changed() {
+                                            set_variable("Old Area Name", watch_area_name.old.as_str());
+                                            set_variable("Area Name", area_name.as_str());
+                                        }
                                     }
-                                }
                                 }
                             }
                         }
@@ -607,8 +609,7 @@ async fn main() {
                                     set_variable_int("outfitClassy", 0);
                                     outfit_sweater = 0;
                                     set_variable_int("outfitSweater", 0);
-                                    watch_current_outfit
-                                      .update_infallible(costume_base);
+                                    watch_current_outfit.update_infallible(costume_base);
                                     set_variable("Current Outfit", "Base");
                                     watch_jam_final.update_infallible(false);
                                     set_variable("Game Jam Final", "False");
@@ -654,6 +655,8 @@ async fn main() {
                                 if let Some(bailey_key) = watch_bailey_key.pair {
                                     if bailey_key.current {
                                         split_states[BAILEY_KEY] = 1
+                                    } else {
+                                        split_states[BAILEY_KEY] = 0
                                     }
                                 } else {
                                     split_states[BAILEY_KEY] = 0
@@ -661,6 +664,8 @@ async fn main() {
                                 if let Some(underbelly_key) = watch_underbelly_key.pair {
                                     if underbelly_key.current {
                                         split_states[UNDERBELLY_KEY] = 1
+                                    } else {
+                                        split_states[UNDERBELLY_KEY] = 0
                                     }
                                 } else {
                                     split_states[UNDERBELLY_KEY] = 0
@@ -668,6 +673,8 @@ async fn main() {
                                 if let Some(tower_key) = watch_tower_key.pair {
                                     if tower_key.current {
                                         split_states[TOWER_KEY] = 1
+                                    } else {
+                                        split_states[TOWER_KEY] = 0
                                     }
                                 } else {
                                     split_states[TOWER_KEY] = 0
@@ -675,6 +682,8 @@ async fn main() {
                                 if let Some(keep_key) = watch_keep_key.pair {
                                     if keep_key.current {
                                         split_states[KEEP_KEY] = 1
+                                    } else {
+                                        split_states[KEEP_KEY] = 0
                                     }
                                 } else {
                                     split_states[KEEP_KEY] = 0
@@ -682,6 +691,8 @@ async fn main() {
                                 if let Some(theatre_key) = watch_theatre_key.pair {
                                     if theatre_key.current {
                                         split_states[THEATRE_KEY] = 1
+                                    } else {
+                                        split_states[THEATRE_KEY] = 0
                                     }
                                 } else {
                                     split_states[THEATRE_KEY] = 0
@@ -692,14 +703,15 @@ async fn main() {
                                       .update_infallible(current_outfit.current);
                                 }
                             }
-
                             if let Some(fguid) = watch_fguid.pair {
                                 if settings.reset && fguid.changed_to(&5185712904977434514)
                                 {
                                     print_message("Run Reset");
-                                    reset()
+                                    reset();
+                                    continue
                                 }
-                            } else if settings.split {
+                            }
+                            if settings.split {
                                 if settings.bailey_key
                                   && split_states[BAILEY_KEY] == 0
                                 {
@@ -755,226 +767,253 @@ async fn main() {
                                         }
                                     }
                                 }
-                                if settings.dream_breaker
-                                  && number_in_range(dream_breaker - split_states[ATTACK], 1, 3)
+                                if number_in_range(dream_breaker - split_states[ATTACK], 1, 3)
                                 {
-                                    print_message("Split: Dream Breaker Pickup");
                                     split_states[ATTACK] = dream_breaker;
-                                    split()
+                                    if settings.dream_breaker {
+                                        print_message("Split: Dream Breaker Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.cling
-                                  && number_in_range(cling - split_states[WALL_RIDE], 1, 3)
+                                if number_in_range(cling - split_states[WALL_RIDE], 1, 3)
                                 {
-                                    print_message("Split: Cling Pickup");
                                     split_states[WALL_RIDE] = cling;
-                                    split()
+                                    if settings.cling {
+                                        print_message("Split: Cling Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.sun_greaves
-                                  && number_in_range(sun_greaves - split_states[AIR_KICK], 1, 3)
+
+                                if number_in_range(sun_greaves - split_states[AIR_KICK], 1, 3)
                                 {
-                                    print_message("Split: Sun Greaves Pickup");
                                     split_states[AIR_KICK] = sun_greaves;
-                                    split()
+                                    if settings.sun_greaves {
+                                        print_message("Split: Sun Greaves Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.slide
-                                  && number_in_range(slide - split_states[SLIDE], 1, 3)
+                                if number_in_range(slide - split_states[SLIDE], 1, 3)
                                 {
-                                    print_message("Split: Slide Pickup");
                                     split_states[SLIDE] = slide;
-                                    split()
+                                    if settings.slide {
+                                        print_message("Split: Slide Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.ascendant_light
-                                  && number_in_range(ascendant_light - split_states[LIGHT], 1, 3)
+                                if number_in_range(ascendant_light - split_states[LIGHT], 1, 3)
                                 {
-                                    print_message("Split: Ascendant Light Pickup");
                                     split_states[LIGHT] = ascendant_light;
-                                    split()
+                                    if settings.ascendant_light {
+                                        print_message("Split: Ascendant Light Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.solar_wind
-                                  && number_in_range(solar_wind - split_states[SLIDE_JUMP], 1, 3)
+                                if number_in_range(solar_wind - split_states[SLIDE_JUMP], 1, 3)
                                 {
-                                    print_message("Split: Solar Wind Pickup");
                                     split_states[SLIDE_JUMP] = solar_wind;
-                                    split()
+                                    if settings.solar_wind {
+                                        print_message("Split: Solar Wind Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.sunsetter
-                                  && number_in_range(sunsetter - split_states[PLUNGE], 1, 3)
+                                if number_in_range(sunsetter - split_states[PLUNGE], 1, 3)
                                 {
-                                    print_message("Split: Sunsetter Pickup");
                                     split_states[PLUNGE] = sunsetter;
-                                    split()
+                                    if settings.sunsetter {
+                                        print_message("Split: Sunsetter Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.soul_cutter
-                                  && number_in_range(soul_cutter - split_states[PROJECTILE], 1, 3)
+                                if number_in_range(soul_cutter - split_states[PROJECTILE], 1, 3)
                                 {
-                                    print_message("Split: Soul Cutter Pickup");
                                     split_states[PROJECTILE] = soul_cutter;
-                                    split()
+                                    if settings.soul_cutter {
+                                        print_message("Split: Soul Cutter Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.indignation
-                                  && number_in_range(indignation - split_states[POWER_BOOST], 1, 3)
+                                if number_in_range(indignation - split_states[POWER_BOOST], 1, 3)
                                 {
-                                    print_message("Split: Indignation Pickup");
                                     split_states[POWER_BOOST] = indignation;
-                                    split()
+                                    if settings.indignation {
+                                        print_message("Split: Indignation Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.strikebreak
-                                  && number_in_range(strikebreak - split_states[CHARGE_ATTACK], 1, 3)
+                                if number_in_range(strikebreak - split_states[CHARGE_ATTACK], 1, 3)
                                 {
-                                    print_message("Split: Strikebreak Pickup");
                                     split_states[CHARGE_ATTACK] = strikebreak;
-                                    split()
+                                    if settings.strikebreak {
+                                        print_message("Split: Strikebreak Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.heliiacal_power
-                                  && number_in_range(heliiacal_power - split_states[EXTRA_KICK], 1, 3)
+                                if number_in_range(heliiacal_power - split_states[EXTRA_KICK], 1, 3)
                                 {
-                                    print_message("Split: Heliiacal Power Pickup");
                                     split_states[EXTRA_KICK] = heliiacal_power;
-                                    split()
+                                    if settings.heliiacal_power {
+                                        print_message("Split: Heliiacal Power Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.memento
-                                  && number_in_range(memento - split_states[MAP], 1, 3)
+                                if number_in_range(memento - split_states[MAP], 1, 3)
                                 {
-                                    print_message("Split: Memento Pickup");
                                     split_states[MAP] = memento;
-                                    split()
+                                    if settings.memento {
+                                        print_message("Split: Memento Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.aerial_finesse
-                                  && number_in_range(aerial_finesse - split_states[AIR_RECOVERY], 1, 3)
+                                if number_in_range(aerial_finesse - split_states[AIR_RECOVERY], 1, 3)
                                 {
-                                    print_message("Split: Aerial Finesse Pickup");
                                     split_states[AIR_RECOVERY] = aerial_finesse;
-                                    split()
+                                    if settings.aerial_finesse {
+                                        print_message("Split: Aerial Finesse Pickup");
+                                        split()
+                                    }
                                 }
-                                if settings.pilgrimage
-                                  && number_in_range(pilgrimage - split_states[MOBILE_HEAL], 1, 3)
+                                if number_in_range(pilgrimage - split_states[MOBILE_HEAL], 1, 3)
                                 {
-                                    print_message("Split: Pilgrimage Pickup");
                                     split_states[MOBILE_HEAL] = pilgrimage;
-                                    split()
-                                }
-                                if settings.empathy
-                                  && number_in_range(empathy - split_states[MAGIC_HASTE], 1, 3)
-                                {
-                                    match empathy {
-                                        1 => print_message("Split: Empathy Pickup #1"),
-                                        2 => print_message("Split: Empathy Pickup #2"),
-                                        _ => print_message("Split: Empathy Pickup #Error [Out of Bounds]"),
+                                    if settings.pilgrimage {
+                                        print_message("Split: Pilgrimage Pickup");
+                                        split()
                                     }
+                                }
+                                if number_in_range(empathy - split_states[MAGIC_HASTE], 1, 3)
+                                {
                                     split_states[MAGIC_HASTE] = empathy;
-                                    split()
-                                }
-                                if settings.good_graces
-                                  && number_in_range(good_graces - split_states[HEAL_BOOST], 1, 3)
-                                {
-                                    match good_graces {
-                                        1 => print_message("Split: Good Graces Pickup #1"),
-                                        2 => print_message("Split: Good Graces Pickup #2"),
-                                        _ => print_message("Split: Good Graces Pickup #Error [Out of Bounds]"),
+                                    if settings.empathy {
+                                        match empathy {
+                                            1 => print_message("Split: Empathy Pickup #1"),
+                                            2 => print_message("Split: Empathy Pickup #2"),
+                                            _ => print_message("Split: Empathy Pickup #Error [Out of Bounds]"),
+                                        }
+                                        split()
                                     }
+                                }
+                                if number_in_range(good_graces - split_states[HEAL_BOOST], 1, 3)
+                                {
                                     split_states[HEAL_BOOST] = good_graces;
-                                    split()
+                                    if settings.good_graces {
+                                        match good_graces {
+                                            1 => print_message("Split: Good Graces Pickup #1"),
+                                            2 => print_message("Split: Good Graces Pickup #2"),
+                                            _ => print_message("Split: Good Graces Pickup #Error [Out of Bounds]"),
+                                        }
+                                        split()
+                                    }
                                 }
-                                if settings.martial_prowess
-                                  && number_in_range(martial_prowess - split_states[DAMAGE_BOOST], 1, 3)
+                                if number_in_range(martial_prowess - split_states[DAMAGE_BOOST], 1, 3)
                                 {
-                                    print_message("Split: Martial Prowess Pickup");
                                     split_states[DAMAGE_BOOST] = martial_prowess;
-                                    split()
-                                }
-                                if settings.clear_mind
-                                  && number_in_range(clear_mind - split_states[MAGIC_PIECE], 1, 3)
-                                {
-                                    match clear_mind {
-                                        1 => print_message("Split: Clear Mind Pickup #1"),
-                                        2 => print_message("Split: Clear Mind Pickup #2"),
-                                        3 => print_message("Split: Clear Mind Pickup #3"),
-                                        _ => print_message("Split: Clear Mind Pickup #Error [Out of Bounds]"),
+                                    if settings.martial_prowess {
+                                        print_message("Split: Martial Prowess Pickup");
+                                        split()
                                     }
+                                }
+                                if number_in_range(clear_mind - split_states[MAGIC_PIECE], 1, 3)
+                                {
                                     split_states[MAGIC_PIECE] = clear_mind;
-                                    split()
-                                }
-                                if settings.professionalism
-                                  && number_in_range(outfit_professionalism - split_states[OUTFIT_PRO], 1, 3)
-                                {
-                                    print_message("Split: Outfit Professionalism Pickup");
-                                    split_states[OUTFIT_PRO] = outfit_professionalism;
-                                    split()
-                                }
-                                if settings.guardian
-                                  && number_in_range(outfit_guardian - split_states[OUTFIT_SHOUJO], 1, 3)
-                                {
-                                    print_message("Split: Outfit Guardian Pickup");
-                                    split_states[OUTFIT_SHOUJO] = outfit_guardian;
-                                    split()
-                                }
-                                if settings.chivalry
-                                  && number_in_range(outfit_chivalry - split_states[OUTFIT_KNIGHT], 1, 3)
-                                {
-                                    print_message("Split: Outfit Chivalry Pickup");
-                                    split_states[OUTFIT_KNIGHT] = outfit_chivalry;
-                                    split()
-                                }
-                                if settings.bleeding_heart
-                                  && number_in_range(outfit_bleeding_heart - split_states[OUTFIT_PAST], 1, 3)
-                                {
-                                    print_message("Split: Outfit Bleeding Heart Pickup");
-                                    split_states[OUTFIT_PAST] = outfit_bleeding_heart;
-                                    split()
-                                }
-                                if settings.nostalgia
-                                  && number_in_range(outfit_nostalgia - split_states[OUTFIT_JAM], 1, 3)
-                                {
-                                    print_message("Split: Outfit Nostalgia Pickup");
-                                    split_states[OUTFIT_JAM] = outfit_nostalgia;
-                                    split()
-                                }
-                                if settings.devotion
-                                  && number_in_range(outfit_devotion - split_states[OUTFIT_FAITH], 1, 3)
-                                {
-                                    print_message("Split: Outfit Devotion Pickup");
-                                    split_states[OUTFIT_FAITH] = outfit_devotion;
-                                    split()
-                                }
-                                if settings.class
-                                  && number_in_range(outfit_class - split_states[OUTFIT_CLASSY], 1, 3)
-                                {
-                                    print_message("Split: Outfit Class Pickup");
-                                    split_states[OUTFIT_CLASSY] = outfit_class;
-                                    split()
-                                }
-                                if settings.sweater
-                                  && number_in_range(outfit_sweater - split_states[OUTFIT_SWEATER], 1, 3)
-                                {
-                                    print_message("Split: Outfit Sweater Pickup");
-                                    split_states[OUTFIT_SWEATER] = outfit_sweater;
-                                    split()
-                                }
-                                if settings.health_upgrades
-                                  && number_in_range(health_upgrade_count - split_states[HEALTH_UPGRADES], 1, 3)
-                                {
-                                    match health_upgrade_count {
-                                        1 => print_message("Split: Health Upgrade Pickup #1"),
-                                        2 => print_message("Split: Health Upgrade Pickup #2"),
-                                        3 => print_message("Split: Health Upgrade Pickup #3"),
-                                        4 => print_message("Split: Health Upgrade Pickup #4"),
-                                        5 => print_message("Split: Health Upgrade Pickup #5"),
-                                        6 => print_message("Split: Health Upgrade Pickup #6"),
-                                        7 => print_message("Split: Health Upgrade Pickup #7"),
-                                        8 => print_message("Split: Health Upgrade Pickup #8"),
-                                        9 => print_message("Split: Health Upgrade Pickup #9"),
-                                        10 => print_message("Split: Health Upgrade Pickup #10"),
-                                        11 => print_message("Split: Health Upgrade Pickup #11"),
-                                        12 => print_message("Split: Health Upgrade Pickup #12"),
-                                        13 => print_message("Split: Health Upgrade Pickup #13"),
-                                        14 => print_message("Split: Health Upgrade Pickup #14"),
-                                        15 => print_message("Split: Health Upgrade Pickup #15"),
-                                        16 => print_message("Split: Health Upgrade Pickup #16"),
-                                        _ => print_message("Split: Health Upgrade Pickup #Error [Out of Bounds]"),
+                                    if settings.clear_mind {
+                                        match clear_mind {
+                                            1 => print_message("Split: Clear Mind Pickup #1"),
+                                            2 => print_message("Split: Clear Mind Pickup #2"),
+                                            3 => print_message("Split: Clear Mind Pickup #3"),
+                                            _ => print_message("Split: Clear Mind Pickup #Error [Out of Bounds]"),
+                                        }
+                                        split()
                                     }
-                                    split_states[HEALTH_UPGRADES] =
-                                      health_upgrade_count;
-                                    split()
+                                }
+                                if number_in_range(outfit_professionalism - split_states[OUTFIT_PRO], 1, 3)
+                                {
+                                    split_states[OUTFIT_PRO] = outfit_professionalism;
+                                    if settings.professionalism {
+                                        print_message("Split: Outfit Professionalism Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_guardian - split_states[OUTFIT_SHOUJO], 1, 3)
+                                {
+                                    split_states[OUTFIT_SHOUJO] = outfit_guardian;
+                                    if settings.guardian {
+                                        print_message("Split: Outfit Guardian Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_chivalry - split_states[OUTFIT_KNIGHT], 1, 3)
+                                {
+                                    split_states[OUTFIT_KNIGHT] = outfit_chivalry;
+                                    if settings.chivalry {
+                                        print_message("Split: Outfit Chivalry Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_bleeding_heart - split_states[OUTFIT_PAST], 1, 3)
+                                {
+                                    split_states[OUTFIT_PAST] = outfit_bleeding_heart;
+                                    if settings.bleeding_heart {
+                                        print_message("Split: Outfit Bleeding Heart Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_nostalgia - split_states[OUTFIT_JAM], 1, 3)
+                                {
+                                    split_states[OUTFIT_JAM] = outfit_nostalgia;
+                                    if settings.nostalgia {
+                                        print_message("Split: Outfit Nostalgia Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_devotion - split_states[OUTFIT_FAITH], 1, 3)
+                                {
+                                    split_states[OUTFIT_FAITH] = outfit_devotion;
+                                    if settings.devotion {
+                                        print_message("Split: Outfit Devotion Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_class - split_states[OUTFIT_CLASSY], 1, 3)
+                                {
+                                    split_states[OUTFIT_CLASSY] = outfit_class;
+                                    if settings.class {
+                                        print_message("Split: Outfit Class Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(outfit_sweater - split_states[OUTFIT_SWEATER], 1, 3)
+                                {
+                                    split_states[OUTFIT_SWEATER] = outfit_sweater;
+                                    if settings.sweater {
+                                        print_message("Split: Outfit Sweater Pickup");
+                                        split()
+                                    }
+                                }
+                                if number_in_range(health_upgrade_count - split_states[HEALTH_UPGRADES], 1, 3)
+                                {
+                                    split_states[HEALTH_UPGRADES] = health_upgrade_count;
+                                    if settings.health_upgrades {
+                                        match health_upgrade_count {
+                                            1 => print_message("Split: Health Upgrade Pickup #1"),
+                                            2 => print_message("Split: Health Upgrade Pickup #2"),
+                                            3 => print_message("Split: Health Upgrade Pickup #3"),
+                                            4 => print_message("Split: Health Upgrade Pickup #4"),
+                                            5 => print_message("Split: Health Upgrade Pickup #5"),
+                                            6 => print_message("Split: Health Upgrade Pickup #6"),
+                                            7 => print_message("Split: Health Upgrade Pickup #7"),
+                                            8 => print_message("Split: Health Upgrade Pickup #8"),
+                                            9 => print_message("Split: Health Upgrade Pickup #9"),
+                                            10 => print_message("Split: Health Upgrade Pickup #10"),
+                                            11 => print_message("Split: Health Upgrade Pickup #11"),
+                                            12 => print_message("Split: Health Upgrade Pickup #12"),
+                                            13 => print_message("Split: Health Upgrade Pickup #13"),
+                                            14 => print_message("Split: Health Upgrade Pickup #14"),
+                                            15 => print_message("Split: Health Upgrade Pickup #15"),
+                                            16 => print_message("Split: Health Upgrade Pickup #16"),
+                                            _ => print_message("Split: Health Upgrade Pickup #Error [Out of Bounds]"),
+                                        }
+                                        split()
+                                    }
                                 }
                                 if let Some(area_name) = watch_area_name.pair {
                                     if area_name.changed() {
@@ -1360,11 +1399,12 @@ async fn main() {
                                 }
                             }
                         }
-                        _ => {}
+                        _ => {
+                        }
                     }
                     next_tick().await;
                 }
-            }
+            } else { next_tick().await; }
         })
           .await;
         print_message("Disconnected... Searching for new process...")
