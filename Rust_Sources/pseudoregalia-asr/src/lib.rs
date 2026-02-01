@@ -68,6 +68,7 @@ async fn main() {
             {
                 let size = retry(|| process.get_module_size(process_name)).await;
                 match size {
+                    // Linux through Wine | Windows native
                     2125824 | 246771712 => {
                         version = Some(GameVersion::EarlyFGP);
                         set_variable("Game Version", "Early FGP")
@@ -1407,7 +1408,8 @@ async fn main() {
             } else { next_tick().await; }
         })
           .await;
-        print_message("Disconnected... Searching for new process...")
+        print_message("Disconnected... Searching for new process...");
+        next_tick().await; // Prevent the Autosplitter from running in an unrestricted loop.
     }
 }
 
