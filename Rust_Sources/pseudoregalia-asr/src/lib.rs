@@ -67,6 +67,7 @@ async fn main() {
             let version: Option<GameVersion>;
             {
                 let size = retry(|| process.get_module_size(process_name)).await;
+                set_variable_int("Module Size", size);
                 match size {
                     // Linux through Wine | Windows native
                     2125824 | 246771712 => {
@@ -87,8 +88,7 @@ async fn main() {
                     }
                     _ => {
                         version = None;
-                        set_variable("Game Version", "Error - Unknown");
-                        set_variable_int("Module Size", size)
+                        set_variable("Game Version", "Error - Unknown")
                     }
                 }
             }
@@ -547,6 +547,40 @@ async fn main() {
                             }
                         }
                     }
+                    {
+                        set_variable_int("State Dream Breaker", split_states[ATTACK]);
+                        set_variable_int("State Cling", split_states[WALL_RIDE]);
+                        set_variable_int("State Sun Greaves", split_states[AIR_KICK]);
+                        set_variable_int("State Slide", split_states[SLIDE]);
+                        set_variable_int("State Ascendant Light", split_states[LIGHT]);
+                        set_variable_int("State Solar Wind", split_states[SLIDE_JUMP]);
+                        set_variable_int("State Sunsetter", split_states[PLUNGE]);
+                        set_variable_int("State Soul Cutter", split_states[PROJECTILE]);
+                        set_variable_int("State Indignation", split_states[POWER_BOOST]);
+                        set_variable_int("State Strikebreak", split_states[CHARGE_ATTACK]);
+                        set_variable_int("State Heliiacal", split_states[EXTRA_KICK]);
+                        set_variable_int("State Map", split_states[MAP]);
+                        set_variable_int("State Aerial Finesse", split_states[AIR_RECOVERY]);
+                        set_variable_int("State Pilgrimage", split_states[MOBILE_HEAL]);
+                        set_variable_int("State Empathy", split_states[MAGIC_HASTE]);
+                        set_variable_int("State Good Graces", split_states[HEAL_BOOST]);
+                        set_variable_int("State Martial Prowess", split_states[DAMAGE_BOOST]);
+                        set_variable_int("State Clear Mind", split_states[MAGIC_PIECE]);
+                        set_variable_int("State Outfit Professional", split_states[OUTFIT_PRO]);
+                        set_variable_int("State Outfit Guardian", split_states[OUTFIT_SHOUJO]);
+                        set_variable_int("State Outfit Soldier", split_states[OUTFIT_KNIGHT]);
+                        set_variable_int("State Outfit Bleeding Heart", split_states[OUTFIT_PAST]);
+                        set_variable_int("State Outfit Nostalgia", split_states[OUTFIT_JAM]);
+                        set_variable_int("State Outfit Devotion", split_states[OUTFIT_FAITH]);
+                        set_variable_int("State Outfit Class", split_states[OUTFIT_CLASSY]);
+                        set_variable_int("State Outfit Sweater", split_states[OUTFIT_SWEATER]);
+                        set_variable_int("State Bailey Key", split_states[BAILEY_KEY]);
+                        set_variable_int("State Underbelly Key", split_states[UNDERBELLY_KEY]);
+                        set_variable_int("State Tower Key", split_states[TOWER_KEY]);
+                        set_variable_int("State Keep Key", split_states[KEEP_KEY]);
+                        set_variable_int("State Theatre Key", split_states[THEATRE_KEY]);
+                        set_variable_int("State Health upgrade", split_states[HEALTH_UPGRADES]);
+                    }
                     match state() {
                         TimerState::NotRunning => {
                             total_silver_keys = 0;
@@ -704,6 +738,7 @@ async fn main() {
                                       .update_infallible(current_outfit.current);
                                 }
                             }
+
                             if let Some(fguid) = watch_fguid.pair {
                                 if settings.reset && fguid.changed_to(&5185712904977434514)
                                 {
