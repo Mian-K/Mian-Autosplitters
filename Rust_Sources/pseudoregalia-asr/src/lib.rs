@@ -255,134 +255,142 @@ async fn main() {
                             offsets.upgrade_tracker[2],
                             0,
                         ];
-                        while off[3] < 0x208 {
-                            if let Ok(f_name_key) = process.read_pointer_path::<FNameKey>(
-                                module.g_world(),
-                                Bit64,
-                                &off,
-                            ) {
-                                if let Ok(f_name) = module.get_fname::<13>(&process, f_name_key)
-                                {
-                                    if let Ok(f_name) = f_name.validate_utf8() {
-                                        off[3] = off[3] + 8;
-                                        if let Ok(flag) = process.read_pointer_path::<i32>(
-                                            module.g_world(),
-                                            Bit64,
-                                            &off,
-                                        ) {
-                                            match f_name {
-                                                "attack" => {
-                                                    dream_breaker = flag;
-                                                    set_variable_int("attack", flag);
+                        if let Ok(array_count) = process.read_pointer_path::<u8>(module.g_world(), Bit64,&[
+                            offsets.upgrade_tracker[0],
+                            offsets.upgrade_tracker[1],
+                            offsets.upgrade_tracker[2] + ARRAY_COUNT]){
+                            let array_length = array_count as u64 * 20;
+                            set_variable_int("Item Tracker Count", array_count);
+                            set_variable_int("Item Tracker Length", array_length);
+                            while off[3] < array_length {
+                                if let Ok(f_name_key) = process.read_pointer_path::<FNameKey>(
+                                    module.g_world(),
+                                    Bit64,
+                                    &off,
+                                ) {
+                                    if let Ok(f_name) = module.get_fname::<13>(&process, f_name_key)
+                                    {
+                                        if let Ok(f_name) = f_name.validate_utf8() {
+                                            off[3] = off[3] + 8;
+                                            if let Ok(flag) = process.read_pointer_path::<i32>(
+                                                module.g_world(),
+                                                Bit64,
+                                                &off,
+                                            ) {
+                                                match f_name {
+                                                    "attack" => {
+                                                        dream_breaker = flag;
+                                                        set_variable_int("attack", flag);
+                                                    }
+                                                    "WallRide" | "wallRide" => {
+                                                        cling = flag;
+                                                        set_variable_int("wallRide", flag);
+                                                    }
+                                                    "airKick" => {
+                                                        sun_greaves = flag;
+                                                        set_variable_int("airKick", flag);
+                                                    }
+                                                    "Slide" | "slide" => {
+                                                        slide = flag;
+                                                        set_variable_int("slide", flag);
+                                                    }
+                                                    "Light" => {
+                                                        ascendant_light = flag;
+                                                        set_variable_int("Light", flag);
+                                                    }
+                                                    "SlideJump" => {
+                                                        solar_wind = flag;
+                                                        set_variable_int("SlideJump", flag);
+                                                    }
+                                                    "plunge" => {
+                                                        sunsetter = flag;
+                                                        set_variable_int("plunge", flag);
+                                                    }
+                                                    "Projectile" | "projectile" => {
+                                                        soul_cutter = flag;
+                                                        set_variable_int("projectile", flag);
+                                                    }
+                                                    "PowerBoost" | "powerBoost" => {
+                                                        indignation = flag;
+                                                        set_variable_int("powerBoost", flag);
+                                                    }
+                                                    "chargeAttack" => {
+                                                        strikebreak = flag;
+                                                        set_variable_int("chargeAttack", flag);
+                                                    }
+                                                    "extraKick" => {
+                                                        heliiacal_power = flag;
+                                                        set_variable_int("extraKick", flag);
+                                                    }
+                                                    "Map" => {
+                                                        memento = flag;
+                                                        set_variable_int("Map", flag);
+                                                    }
+                                                    "airRecovery" => {
+                                                        aerial_finesse = flag;
+                                                        set_variable_int("airRecovery", flag);
+                                                    }
+                                                    "mobileHeal" => {
+                                                        pilgrimage = flag;
+                                                        set_variable_int("mobileHeal", flag);
+                                                    }
+                                                    "magicHaste" => {
+                                                        empathy = flag;
+                                                        set_variable_int("magicHaste", flag);
+                                                    }
+                                                    "HealBoost" => {
+                                                        good_graces = flag;
+                                                        set_variable_int("HealBoost", flag);
+                                                    }
+                                                    "damageBoost" => {
+                                                        martial_prowess = flag;
+                                                        set_variable_int("damageBoost", flag);
+                                                    }
+                                                    "magicPiece" => {
+                                                        clear_mind = flag;
+                                                        set_variable_int("magicPiece", flag);
+                                                    }
+                                                    "outfitPro" => {
+                                                        outfit_professionalism = flag;
+                                                        set_variable_int("outfitPro", flag);
+                                                    }
+                                                    "outfitShoujo" => {
+                                                        outfit_guardian = flag;
+                                                        set_variable_int("outfitShoujo", flag);
+                                                    }
+                                                    "outfitKnight" => {
+                                                        outfit_chivalry = flag;
+                                                        set_variable_int("outfitKnight", flag);
+                                                    }
+                                                    "outfitPast" => {
+                                                        outfit_bleeding_heart
+                                                          = flag;
+                                                        set_variable_int("outfitPast", flag);
+                                                    }
+                                                    "outfitJam" => {
+                                                        outfit_nostalgia = flag;
+                                                        set_variable_int("outfitJam", flag);
+                                                    }
+                                                    "outfitFaith" => {
+                                                        outfit_devotion = flag;
+                                                        set_variable_int("outfitFaith", flag);
+                                                    }
+                                                    "outfitClassy" => {
+                                                        outfit_class = flag;
+                                                        set_variable_int("outfitClassy", flag);
+                                                    }
+                                                    "outfitSweater" => {
+                                                        outfit_sweater = flag;
+                                                        set_variable_int("outfitSweater", flag);
+                                                    }
+                                                    _ => {}
                                                 }
-                                                "WallRide" | "wallRide" => {
-                                                    cling = flag;
-                                                    set_variable_int("wallRide", flag);
-                                                }
-                                                "airKick" => {
-                                                    sun_greaves = flag;
-                                                    set_variable_int("airKick", flag);
-                                                }
-                                                "Slide" | "slide" => {
-                                                    slide = flag;
-                                                    set_variable_int("slide", flag);
-                                                }
-                                                "Light" => {
-                                                    ascendant_light = flag;
-                                                    set_variable_int("Light", flag);
-                                                }
-                                                "SlideJump" => {
-                                                    solar_wind = flag;
-                                                    set_variable_int("SlideJump", flag);
-                                                }
-                                                "plunge" => {
-                                                    sunsetter = flag;
-                                                    set_variable_int("plunge", flag);
-                                                }
-                                                "Projectile" | "projectile" => {
-                                                    soul_cutter = flag;
-                                                    set_variable_int("projectile", flag);
-                                                }
-                                                "PowerBoost" | "powerBoost" => {
-                                                    indignation = flag;
-                                                    set_variable_int("powerBoost", flag);
-                                                }
-                                                "chargeAttack" => {
-                                                    strikebreak = flag;
-                                                    set_variable_int("chargeAttack", flag);
-                                                }
-                                                "extraKick" => {
-                                                    heliiacal_power = flag;
-                                                    set_variable_int("extraKick", flag);
-                                                }
-                                                "Map" => {
-                                                    memento = flag;
-                                                    set_variable_int("Map", flag);
-                                                }
-                                                "airRecovery" => {
-                                                    aerial_finesse = flag;
-                                                    set_variable_int("airRecovery", flag);
-                                                }
-                                                "mobileHeal" => {
-                                                    pilgrimage = flag;
-                                                    set_variable_int("mobileHeal", flag);
-                                                }
-                                                "magicHaste" => {
-                                                    empathy = flag;
-                                                    set_variable_int("magicHaste", flag);
-                                                }
-                                                "HealBoost" => {
-                                                    good_graces = flag;
-                                                    set_variable_int("HealBoost", flag);
-                                                }
-                                                "damageBoost" => {
-                                                    martial_prowess = flag;
-                                                    set_variable_int("damageBoost", flag);
-                                                }
-                                                "magicPiece" => {
-                                                    clear_mind = flag;
-                                                    set_variable_int("magicPiece", flag);
-                                                }
-                                                "outfitPro" => {
-                                                    outfit_professionalism = flag;
-                                                    set_variable_int("outfitPro", flag);
-                                                }
-                                                "outfitShoujo" => {
-                                                    outfit_guardian = flag;
-                                                    set_variable_int("outfitShoujo", flag);
-                                                }
-                                                "outfitKnight" => {
-                                                    outfit_chivalry = flag;
-                                                    set_variable_int("outfitKnight", flag);
-                                                }
-                                                "outfitPast" => {
-                                                    outfit_bleeding_heart
-                                                      = flag;
-                                                    set_variable_int("outfitPast", flag);
-                                                }
-                                                "outfitJam" => {
-                                                    outfit_nostalgia = flag;
-                                                    set_variable_int("outfitJam", flag);
-                                                }
-                                                "outfitFaith" => {
-                                                    outfit_devotion = flag;
-                                                    set_variable_int("outfitFaith", flag);
-                                                }
-                                                "outfitClassy" => {
-                                                    outfit_class = flag;
-                                                    set_variable_int("outfitClassy", flag);
-                                                }
-                                                "outfitSweater" => {
-                                                    outfit_sweater = flag;
-                                                    set_variable_int("outfitSweater", flag);
-                                                }
-                                                _ => {}
                                             }
-                                        }
+                                        } else { off[3] = off[3] + 8; }
                                     } else { off[3] = off[3] + 8; }
                                 } else { off[3] = off[3] + 8; }
-                            } else { off[3] = off[3] + 8; }
-                            off[3] = off[3] + 12;
+                                off[3] = off[3] + 12;
+                            }
                         }
                     }
                     if let Ok(flag) = process.read_pointer_path::<i32>(
@@ -1466,6 +1474,7 @@ fn update_goatlings(
         }
     }
 }
+const ARRAY_COUNT: u64 = 0x28;
 const ATTACK: usize = 0;
 const WALL_RIDE: usize = 1;
 const AIR_KICK: usize = 2;

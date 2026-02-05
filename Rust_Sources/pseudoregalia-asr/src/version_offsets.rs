@@ -70,7 +70,7 @@ pub fn get_offsets(version: &GameVersion) -> Offsets {
             big_key_tower: [0, 0x1B8, 0x33B],
             big_key_keep: [0, 0x1B8, 0x33C],
             big_key_theatre: [0, 0x1B8, 0x488],
-            upgrade_tracker: [0, 0x1B8, 0x1D],
+            upgrade_tracker: [0, 0x1B8, 0x1D8],
             boss_phase: [0, 0x30, 0xE8, 0x2A8, 0x764],
             silver_keys: [0, 0x1B8, 0x1C8],
             health_upgrade_count: [0, 0x1B8, 0x260],
